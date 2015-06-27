@@ -44,7 +44,7 @@ var GridLayer = React.createClass({
 
   renderGraphic: function(grid, c) {
 		console.log(Rectangle);
-		return drawGrid(grid);
+		return this.drawGrid(grid);
   },
 
 	drawVerticalLine: function(height) {
