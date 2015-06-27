@@ -28,10 +28,18 @@ var notifyError = function(title){
 };
 
 
+var notifyMessage = function(title){
+	return function(){
+		notifier(":D", {title: title});
+	};
+};
+
+
 gulp.task("build-scripts", function() {
   return gulp.src("./app/main.jsx")
   	.pipe(plumber())
   	.pipe(browserify({transform: [reactify]}))
+		.on("data", notifyMessage("Script Build Success"))
   	.on("error", notifyError("Script Build Error"))
   	.pipe(extReplace(".js"))
   	.pipe(gulp.dest(outPath));
@@ -42,6 +50,7 @@ gulp.task("build-style", function() {
 	return gulp.src("./app/main.styl")
 		.pipe(plumber())
 		.pipe(stylus({use: [nib()]}))
+		.on("data", notifyMessage("Style Build Success"))
 		.on("error", notifyError("Stylus Build Error"))
 		.pipe(gulp.dest(outPath));
 });
