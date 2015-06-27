@@ -56,7 +56,7 @@ var Card = React.createClass({
 			Handler = this.cardClassRendererMap[lambdaType.cardClass];
 
 			return (
-				<Handler />
+				<Handler cardData={this.props.cardData}/>
 			)
 		}
 	},

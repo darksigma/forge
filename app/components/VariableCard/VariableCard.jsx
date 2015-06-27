@@ -11,8 +11,13 @@ var VariableCard = React.createClass({
 	render: function() {
 		return (
 			<div className="VariableCard">
+				<input className="Input" value={JSON.stringify(this.props.cardData.value)} onChange={this.handleInputChange}></input>
 			</div>
 		);
+	},
+
+	handleInputChange: function(e) {
+
 	},
 
 });
