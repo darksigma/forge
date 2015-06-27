@@ -9,14 +9,24 @@ var GraphStore = Reflux.createStore({
 
 	init: function(){
 		this.firebaseRoot_ = new Firebase(globalConfig.firebaseUrl);
-		this.data_         = Immutable.Map({});
+		this.graphId_      = window.location.pathname.substr(1);
+		this.graphRef_     = this.firebaseRoot_.child("graphs").child(this.graphId_);
+		this.lastSnapshot_ = null;
+
+		this.graphRef_.on("value", this.valueUpdated_.bind(this));
 	},
 
 
 	getInitialState: function(){
-		return this.data_;
+		return {
+			nodes: {}
+		};
 	},
 
+
+	valueUpdated_: function(snapshot) {
+		this.trigger(snapshot.val());
+	}
 
 });
 

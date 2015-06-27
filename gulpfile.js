@@ -3,6 +3,8 @@ var browserify = require("gulp-browserify");
 var stylus     = require("gulp-stylus");
 var plumber    = require("gulp-plumber");
 var nib        = require("nib");
+var fs         = require("fs");
+var path       = require("path");
 var colors     = require("colors");
 var notifier   = require("terminal-notifier");
 var express    = require("express");
@@ -54,6 +56,16 @@ gulp.task("watch", function() {
 gulp.task("server", function() {
 	var app = express();
 	app.use(express.static(publicPath));
+
+	var renderIndex = function(req, res) {
+		fs.readFile(path.join(__dirname, "index.html"), "utf8", function(err, text){
+			res.send(text);
+		});
+	}
+
+	app.get("/", renderIndex);
+	app.get("/:pageId", renderIndex);
+
 	app.listen(8000);
 });
 

@@ -1,3 +1,3 @@
 module.exports = {
-  gridGrey: "rgb(200, 200, 200)"
+  gridGrey: "#f5f5f5"
 }
