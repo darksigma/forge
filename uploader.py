@@ -1,5 +1,8 @@
 import zipfile
+import os
 import datetime
+import boto
+from boto.s3.key import Key
 
 def print_info(archive_name):
     zf = zipfile.ZipFile(archive_name)
@@ -15,15 +18,23 @@ def print_info(archive_name):
 
 print
 print 'CREATING ARCHIVE'
-zf = zipfile.ZipFile('lambda_zip.zip', mode='w')
+zf = zipfile.ZipFile('Lambda.zip', mode='w')
+
 try:
-    print 'ADDING LAMBDA.JS'
-    zf.write('lambda.js')
-    print 'ADDING CARD_FUNCTIONS.JS'
-    zf.write('card_functions.js')
+    files = [f for f in os.listdir('.') if not f.endswith(".zip")]
+    for f in files:
+        print('ADDING: ' + f)
+        zf.write(f)
 finally:
     print 'CLOSING ARCHIVE'
     zf.close()
 
 print
 print_info('lambda_zip.zip')
+
+c = boto.connect_s3()
+b = c.create_bucket('forge-06199412')
+k = Key(b)
+k.key = 'lambda_zip'
+k.set_contents_from_filename('lambda_zip.zip')
+
