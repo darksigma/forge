@@ -13,6 +13,7 @@
     "cassowary": "0.0.2",
     "colors": "^1.0.3",
     "express": "^4.11.1",
+    "firebase": "^2.2.7",
     "gulp": "^3.8.10",
     "gulp-browserify": "^0.5.1",
     "gulp-ext-replace": "^0.1.0",
