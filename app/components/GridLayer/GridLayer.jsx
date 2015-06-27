@@ -20,7 +20,6 @@ var GridLayer = React.createClass({
 
 	mixins: [
     PureRenderMixin,
-    Reflux.connect(GridStore, "grid")
   ],
 
   componentDidMount: function() {
@@ -28,7 +27,7 @@ var GridLayer = React.createClass({
 
 
 	render: function() {
-    var grid = this.state.grid;
+    var grid = this.props.grid;
     var wWidth = grid.get("windowWidth");
     var wHeight = grid.get("windowHeight");
 
