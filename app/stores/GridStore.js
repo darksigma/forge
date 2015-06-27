@@ -9,8 +9,8 @@ var GridStore = Reflux.createStore({
 		this.data_ = Immutable.Map({
 			windowWidth: window.innerWidth,
 			windowHeight: window.innerHeight,
-			transY: 0,
-			transX: 0,
+			transY: -100,
+			transX: -100,
       cellWidth: 200,
 			lineWidth: 3,
 		});
