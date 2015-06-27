@@ -30,11 +30,11 @@ finally:
     zf.close()
 
 print
-print_info('lambda_zip.zip')
+print_info('Lambda.zip')
 
 c = boto.connect_s3()
 b = c.create_bucket('forge-06199412')
 k = Key(b)
 k.key = 'lambda_zip'
-k.set_contents_from_filename('lambda_zip.zip')
+k.set_contents_from_filename('Lambda.zip')
 
