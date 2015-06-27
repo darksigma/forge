@@ -6,21 +6,23 @@ var GridLayer       = require("../GridLayer/GridLayer.jsx")
 var LinkLayer       = require("../LinkLayer/LinkLayer.jsx")
 var CardLayer       = require("../CardLayer/CardLayer.jsx")
 var GraphStore      = require("../../stores/GraphStore.js");
+var GridStore       = require("../../stores/GridStore.js");
 
 
 var App = React.createClass({
 
 	mixins: [
 		PureRenderMixin,
-		Reflux.connect(GraphStore, "graph")
+		Reflux.connect(GraphStore, "graph"),
+		Reflux.connect(GridStore, "grid"),
 	],
 
 	render: function() {
 		return (
 			<div className="App">
-				<GridLayer graph={this.state.graph}/>
-				<LinkLayer graph={this.state.graph}/>
-				<CardLayer graph={this.state.graph}/>
+				<GridLayer graph={this.state.graph} grid={this.state.grid} />
+				<LinkLayer graph={this.state.graph} grid={this.state.grid} />
+				<CardLayer graph={this.state.graph} grid={this.state.grid} />
 			</div>
 		);
 	}

@@ -9,8 +9,16 @@ var Card = React.createClass({
 
 
 	render: function() {
+		var rootStyle = {
+			width: this.props.width + "px",
+			height: this.props.width + "px",
+			transform: "translate(" + this.props.x + "px," + this.props.y + "px)"
+		};
+
 		return (
-			<div className="Card">
+			<div className="Card" style={rootStyle}>
+				<div className="CardInner">
+				</div>
 			</div>
 		);
 	},
