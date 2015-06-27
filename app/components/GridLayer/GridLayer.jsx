@@ -28,6 +28,8 @@ var GridLayer = React.createClass({
 
 	render: function() {
     var grid = this.props.grid;
+		var cards = this.props.graph.cards;
+		console.log(cards);
     var wWidth = grid.get("windowWidth");
     var wHeight = grid.get("windowHeight");
 
@@ -43,7 +45,6 @@ var GridLayer = React.createClass({
 	},
 
   renderGraphic: function(grid, c) {
-		console.log(Rectangle);
 		return this.drawGrid(grid, c.gridGrey);
   },
 
@@ -81,18 +82,17 @@ var GridLayer = React.createClass({
 
 		var horizontalStart = (cellSize - transY)%cellSize;
 		var verticalStart = (cellSize - transX)%cellSize;
-		console.log(transY%cellSize);
-		console.log(horizontalStart);
 
 		var numVertical = width/cellSize;
 		var numHorizontal = height/cellSize;
 
+		var lineWidthOffset = (lineWidth - 1)/2;
 		var lines = [];
 		for(var i = 0; i < numHorizontal; i++) {
-			lines.push(this.drawHorizontalLine(width, horizontalStart + i*cellSize, lineWidth, color));
+			lines.push(this.drawHorizontalLine(width, horizontalStart + i*cellSize - lineWidthOffset, lineWidth, color));
 		}
 		for(var i = 0; i < numVertical; i++) {
-			lines.push(this.drawVerticalLine(height, verticalStart + i*cellSize, lineWidth, color));
+			lines.push(this.drawVerticalLine(height, verticalStart + i*cellSize - lineWidthOffset, lineWidth, color));
 		}
 
 		return lines;
