@@ -5,7 +5,8 @@ var cardTypes = {};
 
 
 cardTypes.number = {
-	name: "Number",
+	humanReadableName: "Number",
+	cardClass: "variable",
 	run: function() {
 		return new Promise(function(resolve, reject) {
 			return resolve(null);
@@ -16,7 +17,8 @@ cardTypes.number = {
 
 
 cardTypes.add = {
-	name: "Add",
+	humanReadableName: "Add",
+	cardClass: "function",
 	run: function() {
 		return new Promise(function(resolve, reject) {
 			return resolve(null);
