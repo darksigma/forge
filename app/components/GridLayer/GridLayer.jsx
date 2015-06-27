@@ -1,5 +1,8 @@
 var React           = require("react/addons");
 var classSet        = React.addons.classSet;
+
+var _               = require("lodash");
+
 var PureRenderMixin = React.addons.PureRenderMixin;
 
 var ReactArt        = require("react-art");
@@ -29,7 +32,6 @@ var GridLayer = React.createClass({
 	render: function() {
     var grid = this.props.grid;
 		var cards = this.props.graph.cards;
-		console.log(cards);
     var wWidth = grid.get("windowWidth");
     var wHeight = grid.get("windowHeight");
 
@@ -38,34 +40,39 @@ var GridLayer = React.createClass({
         <Surface
           width={wWidth}
           height={wHeight}>
-          {this.renderGraphic(grid, c)}
+					<Group x={0} y={0}>
+						{this.drawActiveCells(grid, cards, c.activeCells)}
+					</Group>
+					<Group x={0} y={0}>
+						{this.drawGrid(grid, c.grid)}
+					</Group>
         </Surface>
 			</div>
 		);
 	},
 
-  renderGraphic: function(grid, c) {
-		return this.drawGrid(grid, c.gridGrey);
-  },
+	drawActiveCells: function(grid, cards, color) {
+		var cellSize = grid.get("cellWidth");
+		var transX = grid.get("transX");
+		var transY = grid.get("transY");
 
-	drawVerticalLine: function(height, xOffset, lineWidth, color) {
-		return(
-			<Group x={xOffset} y={0}>
-				<Rectangle
-					width={lineWidth}
-					height={height}
-					fill={color}
-				/>
-			</Group>
-		);
+		// for each card, figure out their location by
+		var highlights = [];
+		for(key in cards) {
+			var card = cards[key];
+			var x = card.x*cellSize - transX;
+			var y = card.y*cellSize - transY;
+			highlights.push(this.drawActiveCell(cellSize, x, y, c.activeCell));
+		}
+		return highlights;
 	},
 
-	drawHorizontalLine: function(width, yOffset, lineWidth, color) {
+	drawActiveCell: function(cellSize, x, y, color) {
 		return(
-			<Group x={0} y={yOffset}>
+			<Group x={x} y={y}>
 				<Rectangle
-					width={width}
-					height={lineWidth}
+					width={cellSize}
+					height={cellSize}
 					fill={color}
 				/>
 			</Group>
@@ -96,6 +103,30 @@ var GridLayer = React.createClass({
 		}
 
 		return lines;
+	},
+
+	drawVerticalLine: function(height, xOffset, lineWidth, color) {
+		return(
+			<Group x={xOffset} y={0}>
+				<Rectangle
+					width={lineWidth}
+					height={height}
+					fill={color}
+				/>
+			</Group>
+		);
+	},
+
+	drawHorizontalLine: function(width, yOffset, lineWidth, color) {
+		return(
+			<Group x={0} y={yOffset}>
+				<Rectangle
+					width={width}
+					height={lineWidth}
+					fill={color}
+				/>
+			</Group>
+		);
 	},
 
 });

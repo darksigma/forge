@@ -1,3 +1,4 @@
 module.exports = {
-  gridGrey: "#f5f5f5"
+  grid: "#f5f5f5",
+	activeCell: "#fafafa"
 }
