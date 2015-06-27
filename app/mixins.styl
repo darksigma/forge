@@ -1,0 +1,67 @@
+$default-animation-duration = 200ms
+
+$default-text-color = rgb(40,40,40)
+
+
+blue($opacity = 1)
+	rgba(74,144,226,$opacity)
+
+
+pink($opacity = 1)
+	rgba(243,157,212,$opacity)
+
+
+black($opacity = 1)
+	rgba(0,0,0,$opacity)
+
+
+absolute-fill()
+	position: absolute
+	top: 0
+	left: 0
+	right: 0
+	bottom: 0
+
+
+box-shadow-level($level = 2)
+	if $level is 0
+		box-shadow: 0 0 0 black(0)
+	else if $level is 1
+		box-shadow: 0 1px 6px black(0.15)
+	else if $level is 2
+		box-shadow: 0 1px 6px black(0.3)
+
+
+$button-background = rgb(240,240,240)
+$button-foreground = black(0.6)
+$button-width      = 64px
+
+
+button-style()
+	width: $button-width
+	height: $button-width
+	border-radius: 100%
+	button-default-state()
+
+	&:hover
+		button-hover-state()
+
+	&:active, &.active
+		button-active-state()
+
+
+button-default-state()
+	transition: box-shadow $default-animation-duration ease, transform $default-animation-duration ease
+	box-shadow-level(0)
+	transform: scale(1)
+
+
+button-hover-state()
+	box-shadow-level(1)
+	transform: scale(1)
+
+
+button-active-state()
+	box-shadow-level(2)
+	transform: scale(1.1)
+
