@@ -55,6 +55,13 @@ gulp.task("watch", function() {
 
 gulp.task("server", function() {
 	var app = express();
+
+	// Disable caching.
+	app.use(function(req, res, next) {
+	  req.headers['if-none-match'] = 'no-match-for-this';
+	  next();
+	});
+
 	app.use(express.static(publicPath));
 
 	var renderIndex = function(req, res) {
