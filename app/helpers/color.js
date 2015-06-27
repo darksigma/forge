@@ -1,3 +1,3 @@
 module.exports = {
-  gridGrey: "#000000"
+  gridGrey: "#f5f5f5"
 }

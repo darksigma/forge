@@ -82,8 +82,8 @@ var GridLayer = React.createClass({
 		var horizontalStart = transX%cellSize;
 		var verticalStart = transY%cellSize;
 
-		var numVertical = width/cellSize;
-		var numHorizontal = height/cellSize;
+		var numVertical = width/cellSize + 1;
+		var numHorizontal = height/cellSize + 1;
 
 		var lines = [];
 		for(var i = 0; i < numHorizontal; i++) {
