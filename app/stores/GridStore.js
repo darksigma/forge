@@ -15,7 +15,7 @@ var GridStore = Reflux.createStore({
 			lineWidth: 3,
 		});
 
-		var debounced = _.debounce(this.handleResize_.bind(this), 50)
+		var debounced = _.debounce(this.handleResize_.bind(this), 200)
 		window.addEventListener("resize", debounced);
 	},
 
