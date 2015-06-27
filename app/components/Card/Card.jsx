@@ -19,7 +19,10 @@ var Card = React.createClass({
 		return (
 			<div className="Card" style={rootStyle}>
 				<div className="CardInner">
-					<div className="header">{this.getCardName()}</div>
+					<div className="Header">
+						<div className="Icon"></div>
+						<div className="Name">{this.getCardName()}</div>
+					</div>
 				</div>
 			</div>
 		);
