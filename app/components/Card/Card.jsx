@@ -1,6 +1,7 @@
 var React           = require("react/addons");
 var classSet        = React.addons.classSet;
 var PureRenderMixin = React.addons.PureRenderMixin;
+var lambdaTypes     = require("../../../lambdaTypes.js");
 
 
 var Card = React.createClass({
@@ -18,9 +19,21 @@ var Card = React.createClass({
 		return (
 			<div className="Card" style={rootStyle}>
 				<div className="CardInner">
+					<div className="header">{this.getCardName()}</div>
 				</div>
 			</div>
 		);
+	},
+
+
+	getCardName: function() {
+		var lambdaType = lambdaTypes[this.props.cardData.type];
+		if (lambdaType) {
+			return lambdaType.name;
+		}
+		else {
+			return "Unknown Card";
+		}
 	},
 
 });
