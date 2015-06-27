@@ -14,6 +14,9 @@ var GridStore = Reflux.createStore({
       cellWidth: 200,
 			lineWidth: 3,
 		});
+
+		var debounced = _.debounce(this.handleResize_.bind(this), 50)
+		window.addEventListener("resize", debounced);
 	},
 
 
@@ -21,6 +24,12 @@ var GridStore = Reflux.createStore({
 		return this.data_;
 	},
 
+
+	handleResize_: function(e) {
+		this.data_ = this.data_.set("windowWidth", window.innerWidth);
+		this.data_ = this.data_.set("windowHeight", window.innerHeight);
+		this.trigger(this.data_);
+	},
 
 });
 
