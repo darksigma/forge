@@ -44,28 +44,56 @@ var GridLayer = React.createClass({
 
   renderGraphic: function(grid, c) {
 		console.log(Rectangle);
-		return this.drawGrid(grid);
+		return this.drawGrid(grid, c.gridGrey);
   },
 
-	drawVerticalLine: function(height) {
+	drawVerticalLine: function(height, xOffset, lineWidth, color) {
 		return(
-			<Group x={0} y={0}>
+			<Group x={xOffset} y={0}>
 				<Rectangle
-					width={3}
+					width={lineWidth}
 					height={height}
-					fill={c.gridGrey}
+					fill={color}
 				/>
 			</Group>
 		);
 	},
 
-	drawHorizontalLine: function() {
+	drawHorizontalLine: function(width, yOffset, lineWidth, color) {
+		return(
+			<Group x={0} y={yOffset}>
+				<Rectangle
+					width={width}
+					height={lineWidth}
+					fill={color}
+				/>
+			</Group>
+		);
 	},
 
-	drawGrid: function(grid) {
+	drawGrid: function(grid, color) {
 		var height = grid.get("windowHeight");
 		var width = grid.get("windowWidth");
 		var cellSize = grid.get("cellWidth");
+		var transX = grid.get("transX");
+		var transY = grid.get("transY");
+		var lineWidth = grid.get("lineWidth");
+
+		var horizontalStart = transX%cellSize;
+		var verticalStart = transY%cellSize;
+
+		var numVertical = width/cellSize;
+		var numHorizontal = height/cellSize;
+
+		var lines = [];
+		for(var i = 0; i < numHorizontal; i++) {
+			lines.push(this.drawHorizontalLine(width, horizontalStart + i*cellSize, lineWidth, color));
+		}
+		for(var i = 0; i < numVertical; i++) {
+			lines.push(this.drawVerticalLine(height, verticalStart + i*cellSize, lineWidth, color));
+		}
+
+		return lines;
 	},
 
 });
