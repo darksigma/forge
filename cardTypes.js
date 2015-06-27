@@ -13,6 +13,7 @@ cardTypes.number = {
 		});
 	},
 	inputs: [],
+	hasOutput: true,
 };
 
 
@@ -25,6 +26,7 @@ cardTypes.add = {
 		});
 	},
 	inputs: ["number1", "number2"],
+	hasOutput: true,
 };
 
 

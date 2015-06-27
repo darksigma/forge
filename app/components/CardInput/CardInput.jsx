@@ -11,6 +11,9 @@ var CardInput = React.createClass({
 	render: function() {
 		return (
 			<div className="CardInput">
+				<div className="Label">
+					{this.props.inputName}
+				</div>
 			</div>
 		);
 	},
