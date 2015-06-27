@@ -1,10 +1,10 @@
 var Promise = require("promise");
 
 
-var lambdaTypes = {};
+var cardTypes = {};
 
 
-lambdaTypes.number = {
+cardTypes.number = {
 	name: "Number",
 	run: function() {
 		return new Promise(function(resolve, reject) {
@@ -15,7 +15,7 @@ lambdaTypes.number = {
 };
 
 
-lambdaTypes.add = {
+cardTypes.add = {
 	name: "Add",
 	run: function() {
 		return new Promise(function(resolve, reject) {
@@ -26,4 +26,4 @@ lambdaTypes.add = {
 };
 
 
-module.exports = lambdaTypes;
+module.exports = cardTypes;

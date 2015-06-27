@@ -1,7 +1,7 @@
 var React           = require("react/addons");
 var classSet        = React.addons.classSet;
 var PureRenderMixin = React.addons.PureRenderMixin;
-var lambdaTypes     = require("../../../lambdaTypes.js");
+var cardTypes       = require("../../../cardTypes.js");
 
 
 var Card = React.createClass({
@@ -30,7 +30,7 @@ var Card = React.createClass({
 
 
 	getCardName: function() {
-		var lambdaType = lambdaTypes[this.props.cardData.type];
+		var lambdaType = cardTypes[this.props.cardData.type];
 		if (lambdaType) {
 			return lambdaType.name;
 		}
