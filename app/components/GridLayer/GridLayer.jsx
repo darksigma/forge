@@ -79,8 +79,8 @@ var GridLayer = React.createClass({
 		var transY = grid.get("transY");
 		var lineWidth = grid.get("lineWidth");
 
-		var horizontalStart = transX%cellSize;
-		var verticalStart = transY%cellSize;
+		var horizontalStart = transY%cellSize;
+		var verticalStart = transX%cellSize;
 
 		var numVertical = width/cellSize + 1;
 		var numHorizontal = height/cellSize + 1;
