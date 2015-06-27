@@ -10,7 +10,7 @@ var GridStore = Reflux.createStore({
 			windowWidth: window.innerWidth,
 			windowHeight: window.innerHeight,
 			transY: -100,
-			transX: -150,
+			transX: -100,
       cellWidth: 200,
 			lineWidth: 3,
 		});
