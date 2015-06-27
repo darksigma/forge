@@ -21,8 +21,8 @@ var CardLayer = React.createClass({
 
 	renderCard: function(cardData, cardId) {
 		var cellWidth = this.props.grid.get("cellWidth");
-		var x = (cardData.x * cellWidth) - this.props.grid.get("left");
-		var y = (cardData.y * cellWidth) - this.props.grid.get("top");
+		var x = (cardData.x * cellWidth) - this.props.grid.get("transX");
+		var y = (cardData.y * cellWidth) - this.props.grid.get("transY");
 		return (
 			<Card key={cardId} cardData={cardData} x={x} y={y} width={cellWidth}/>
 		);
