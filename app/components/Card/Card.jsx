@@ -4,6 +4,7 @@ var PureRenderMixin = React.addons.PureRenderMixin;
 var cardTypes       = require("../../../cardTypes.js");
 var FunctionCard    = require("../FunctionCard/FunctionCard.jsx")
 var VariableCard    = require("../VariableCard/VariableCard.jsx")
+var SignalIndicator = require("../SignalIndicator/SignalIndicator.jsx")
 
 
 var Card = React.createClass({
@@ -29,6 +30,7 @@ var Card = React.createClass({
 					<div className="Header">
 						<div className="Icon"></div>
 						<div className="Name">{this.getCardName()}</div>
+						<SignalIndicator active={true} />
 					</div>
 					<div className="CardUI">
 						{this.renderCardClass()}
