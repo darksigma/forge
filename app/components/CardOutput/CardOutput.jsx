@@ -11,6 +11,7 @@ var CardOutput = React.createClass({
 	render: function() {
 		return (
 			<div className="CardOutput">
+				<div className="Label">Output</div>
 			</div>
 		);
 	},
