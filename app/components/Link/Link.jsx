@@ -12,6 +12,7 @@ var cardTypes        = require("../../cardTypes");
 
 var selectionActions = require("../../actions/selectionActions.js");
 var SelectionStore   = require("../../stores/SelectionStore.js");
+var hoverActions      = require("../../actions/hoverActions.js");
 
 var Link = React.createClass({
 
@@ -42,20 +43,30 @@ var Link = React.createClass({
 		if(selected.get("type") == "input" && this.props.inputName == selected.get("inputName") && cardId == selected.get("cardId")) {
 			select = true;
 		}
+		var hov = false;
+		var hovered = this.props.hover.get("hoverData");
+		if(hovered.get("type") == "input" && this.props.inputName == hovered.get("inputName") && cardId == hovered.get("cardId")) {
+			hov = true;
+		}
 		var classes = classSet({
 			sel: select,
 			signal: true,
+			hov: hov,
 		});
 
 		return (
 			<g className="Link">
-				<path className={classes} d={pointString} onMouseDown={this.handleMouseDown}></path>
+				<path className={classes} d={pointString} onMouseOver={this.onMouseEnter} onMouseDown={this.handleMouseDown}></path>
 			</g>
 		);
 	},
 
 	handleMouseDown: function() {
 		selectionActions.selectLink(this.props.cardId, this.props.inputName);
+	},
+
+	onMouseEnter: function() {
+		hoverActions.hoverLink(this.props.cardId, this.props.inputName);
 	},
 
 	calculateStart: function(startCard, cardId, grid) {

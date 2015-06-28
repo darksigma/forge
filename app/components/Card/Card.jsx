@@ -32,10 +32,11 @@ var Card = React.createClass({
 			transform: "translate(" + this.props.x + "px," + this.props.y + "px)"
 		};
 
+		console.log(this.props.hovered);
 		var classes = classSet({
 			Card: true,
-			hovered: this.props.hovered,
 			selected: this.props.selected,
+			hovered: this.props.hovered,
 		});
 
 		var lambdaType = cardTypes[this.props.cardData.type];
@@ -93,7 +94,7 @@ var Card = React.createClass({
 
 	handleMouseDown: function() {
 		selectionActions.selectCard(this.props.cardId);
-		hoverActions.clearHover();
+		//hoverActions.clearHover();
 	},
 
 

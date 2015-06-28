@@ -7,7 +7,8 @@ var HoverStore = Reflux.createStore({
 
 	init: function(){
 		this.data_ = Immutable.fromJS({
-			hoverCard: null
+			hoverData: Immutable.Map({
+			})
 		});
 	},
 
@@ -17,8 +18,8 @@ var HoverStore = Reflux.createStore({
 	},
 
 
-	setHoveredCard: function(cardId) {
-		this.data_ = this.data_.set("hoverCard", cardId);
+	setHoveredData: function(hoverData) {
+		this.data_ = this.data_.set("hoverData", hoverData);
 		this.trigger(this.data_);
 	},
 

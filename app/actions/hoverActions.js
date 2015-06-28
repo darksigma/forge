@@ -1,4 +1,5 @@
 var HoverStore = require("../stores/HoverStore.js");
+var Immutable      = require("Immutable");
 var Promise        = require("promise");
 
 
@@ -7,7 +8,7 @@ var hoverActions = {}
 
 hoverActions.clearHover = function() {
 	return new Promise(function(resolve, reject) {
-		HoverStore.setHoveredCard(null);
+		HoverStore.setHoveredData(Immutable.Map());
 		resolve();
 	});
 };
@@ -15,7 +16,22 @@ hoverActions.clearHover = function() {
 
 hoverActions.hoverCard = function(cardId) {
 	return new Promise(function(resolve, reject) {
-		HoverStore.setHoveredCard(cardId);
+		HoverStore.setHoveredData(Immutable.Map({
+			type: "card",
+			cardId: cardId,
+		}));
+		resolve();
+	});
+};
+
+
+hoverActions.hoverLink = function(cardId, inputName) {
+	return new Promise(function(resolve, reject) {
+		HoverStore.setHoveredData(Immutable.Map({
+			type: "input",
+			cardId: cardId,
+			inputName: inputName,
+		}));
 		resolve();
 	});
 };
