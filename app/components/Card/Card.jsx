@@ -70,7 +70,9 @@ var Card = React.createClass({
 			Handler = this.cardClassRendererMap[lambdaType.cardClass];
 
 			return (
-				<Handler cardData={this.props.cardData}/>
+				<Handler
+					cardId={this.props.cardId}
+					cardData={this.props.cardData}/>
 			)
 		}
 	},
@@ -97,7 +99,7 @@ var Card = React.createClass({
 
 
 	handleDragMove: function(e){
-		dragActions.continueDrag(e.currentX - e.startX, e.currentY - e.startY);
+		dragActions.continueDrag(e.currentTarget, e.currentX - e.startX, e.currentY - e.startY);
 	},
 
 

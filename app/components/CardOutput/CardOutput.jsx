@@ -4,12 +4,14 @@ var React           = require("react/addons");
 var SignalIndicator = require("../SignalIndicator/SignalIndicator.jsx");
 var classSet        = React.addons.classSet;
 var PureRenderMixin = React.addons.PureRenderMixin;
+var Droppable       = require("../../mixins/Droppable.jsx");
+var Draggable       = require("../../mixins/Draggable.jsx");
+var dragActions     = require("../../actions/dragActions.js");
 
 
 var CardOutput = React.createClass({
 
-	mixins: [PureRenderMixin],
-
+	mixins: [PureRenderMixin, Draggable, Droppable],
 
 	render: function() {
 		var foundInputsToThis = _.any(this.props.graph.cards, function(cardData, cardId) {
@@ -28,6 +30,13 @@ var CardOutput = React.createClass({
 				<SignalIndicator active={foundInputsToThis} />
 			</div>
 		);
+	},
+
+
+	handleDrop: function(dragData) {
+		if (dragData && dragData.get("type") === "input") {
+			dragActions.createLink(this.props.cardId, dragData.get("cardId"), dragData.get("inputName"));
+		}
 	},
 
 });

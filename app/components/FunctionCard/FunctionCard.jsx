@@ -20,6 +20,7 @@ var FunctionCard = React.createClass({
 		);
 	},
 
+
 	renderInputs: function() {
 		var lambdaType = cardTypes[this.props.cardData.type];
 		var cardInputs = this.props.cardData.inputs || {};

@@ -13,13 +13,12 @@ var dragActions = {}
 
 dragActions.startDrag = function(dragData, startX, startY, offsetX, offsetY) {
 	return new Promise(function(resolve, reject) {
-		console.log();
-
 		var components = dropHandler.getComponents();
 		var componentRects = _.map(components, function(component) {
 			return {
 				component: component,
-				rect: component.getDOMNode().getBoundingClientRect()
+				rect: component.getDOMNode().getBoundingClientRect(),
+				node: component.getDOMNode()
 			};
 		});
 
@@ -36,21 +35,29 @@ dragActions.startDrag = function(dragData, startX, startY, offsetX, offsetY) {
 };
 
 
-dragActions.continueDrag = function(offsetX, offsetY) {
+dragActions.continueDrag = function(currentTarget, offsetX, offsetY) {
 	return new Promise(function(resolve, reject) {
 		var drag     = DragStore.getData();
 		var currentX = drag.get("startX") + offsetX;
 		var currentY = drag.get("startY") + offsetY;
 
+		// First attempt to find an element contained in a drop node.
 		var draggedOver = _.find(drag.get("componentRects"), function(data) {
-			var rect = data.rect;
-			return (
-				rect.left <= currentX &&
-				rect.right >= currentX &&
-				rect.top <= currentY &&
-				rect.bottom >= currentY
-			);
+			return data.node.contains(currentTarget);
 		});
+
+		// Then use a rect computation.
+		// TODO: Use document order? Possibly sort by reverse order.
+		if (!draggedOver) {
+			draggedOver = _.find(drag.get("componentRects"), function(data) {
+				return (
+					data.rect.left <= currentX &&
+					data.rect.right >= currentX &&
+					data.rect.top <= currentY &&
+					data.rect.bottom >= currentY
+				);
+			});
+		}
 
 		if (draggedOver) {
 			var draggedOverComponent = draggedOver.component;
@@ -99,6 +106,15 @@ dragActions.dropCardInCell = function(cardId, coordinate) {
 	}).done();
 };
 
+
+dragActions.createLink = function(outputCardId, inputCardId, inputName) {
+	return new Promise(function(resolve, reject) {
+		if (inputCardId !== outputCardId) {
+			GraphStore.setCardInput(inputCardId, inputName, outputCardId);			
+		}
+		resolve();
+	}).done();
+};
 
 
 module.exports = dragActions

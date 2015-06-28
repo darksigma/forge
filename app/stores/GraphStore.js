@@ -38,6 +38,12 @@ var GraphStore = Reflux.createStore({
 	},
 
 
+	setCardInput: function(cardId, inputName, inputValue) {
+		var inputsRef = this.graphRef_.child("cards").child(cardId).child("inputs").child(inputName);
+		inputsRef.set(inputValue);
+	},
+
+
 	valueUpdated_: function(snapshot) {
 		this.data_ = snapshot.val();
 		this.trigger(this.data_);
