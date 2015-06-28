@@ -39,18 +39,12 @@ var Link = React.createClass({
 
 		var select = false;
 		var selected = this.props.selection.get("selectedData");
-		console.log('......');
-		console.log(this.props.inputName);
-		console.log(selected.get("cardId"));
-		console.log(selected.get("inputName"));
-		console.log(selected.get("type"));
 		if(selected.get("type") == "input" && this.props.inputName == selected.get("inputName") && cardId == selected.get("cardId")) {
-			console.log(card);
 			select = true;
 		}
 		var classes = classSet({
-			signal: true,
 			sel: select,
+			signal: true,
 		});
 
 		return (
