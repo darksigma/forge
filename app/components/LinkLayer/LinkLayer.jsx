@@ -75,7 +75,9 @@ var LinkLayer = React.createClass({
 	},
 
 	calculatePath: function(start, stop, grid) {
-		return [start, stop];
+		var preStart = [start[0]-12, start[1]];
+		var postStop = [stop[0]+12, stop[1]];
+		return [preStart, start, stop, postStop];
 	},
 
 	// points = [[0,0],[0,1]]  <-- example
