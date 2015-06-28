@@ -7,6 +7,7 @@ var LinkLayer       = require("../LinkLayer/LinkLayer.jsx")
 var CardLayer       = require("../CardLayer/CardLayer.jsx")
 var GraphStore      = require("../../stores/GraphStore.js");
 var GridStore       = require("../../stores/GridStore.js");
+var SelectionStore  = require("../../stores/SelectionStore.js");
 
 
 var App = React.createClass({
@@ -15,6 +16,7 @@ var App = React.createClass({
 		PureRenderMixin,
 		Reflux.connect(GraphStore, "graph"),
 		Reflux.connect(GridStore, "grid"),
+		Reflux.connect(SelectionStore, "selection"),
 	],
 
 	render: function() {
@@ -22,7 +24,7 @@ var App = React.createClass({
 			<div className="App">
 				<GridLayer graph={this.state.graph} grid={this.state.grid} />
 				<LinkLayer graph={this.state.graph} grid={this.state.grid} />
-				<CardLayer graph={this.state.graph} grid={this.state.grid} />
+				<CardLayer graph={this.state.graph} grid={this.state.grid} selection={this.state.selection} />
 				<img className="Logo" src="/assets/forge.svg"></img>
 			</div>
 		);
