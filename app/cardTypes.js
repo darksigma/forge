@@ -29,6 +29,19 @@ cardTypes.number = {
 	hasOutput: true,
 };
 
+cardTypes.string = {
+	humanReadableName: "String",
+	cardClass: "variable",
+	run: runVariable,
+	initialize: function(cardId, GraphStore) {
+		GraphStore.updateCardData(cardId, {
+			value: ""
+		});
+	},
+	inputs: [],
+	hasOutput: true,
+};
+
 cardTypes.httpGet = {
 	humanReadableName: "GET",
 	cardClass: "request",
