@@ -71,11 +71,13 @@ exports.handler = function(event, context) {
         console.log("responseCardId ", cards[message.nodeId].responseCardId, " cards ", cards);
 
         evaluateCard(cards, cards[message.nodeId].responseCardId, message.data, message.requestId)
+        .then(function(){
+            context.succeed(message);
+        })
         .catch(function(err) {
             console.log("Error: ", err, err.stack)
         });
 
-		context.succeed(message);
 	});
 };
 
