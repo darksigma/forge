@@ -80,21 +80,22 @@ var GridLayer = React.createClass({
 	},
 
 	drawGrid: function(grid, color) {
-		var height = grid.get("windowHeight");
-		var width = grid.get("windowWidth");
-		var cellSize = grid.get("cellWidth");
-		var transX = grid.get("transX");
-		var transY = grid.get("transY");
+		var height    = grid.get("windowHeight");
+		var width     = grid.get("windowWidth");
+		var cellSize  = grid.get("cellWidth");
+		var transX    = grid.get("transX");
+		var transY    = grid.get("transY");
 		var lineWidth = grid.get("lineWidth");
 
 		var horizontalStart = (cellSize - transY)%cellSize;
-		var verticalStart = (cellSize - transX)%cellSize;
+		var verticalStart   = (cellSize - transX)%cellSize;
 
-		var numVertical = width/cellSize;
+		var numVertical   = width/cellSize;
 		var numHorizontal = height/cellSize;
 
 		var lineWidthOffset = (lineWidth - 1)/2;
-		var lines = [];
+		var lines           = [];
+
 		for(var i = 0; i < numHorizontal; i++) {
 			lines.push(this.drawHorizontalLine(width, horizontalStart + i*cellSize - lineWidthOffset, lineWidth, color));
 		}
