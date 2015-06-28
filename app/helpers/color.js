@@ -1,4 +1,5 @@
 module.exports = {
   grid: "#f5f5f5",
-	activeCell: "#fafafa"
+	activeCell: "#fbfbfb",
+	signal: "#337da3"
 }
