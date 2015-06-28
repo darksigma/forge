@@ -231,6 +231,18 @@ cardTypes.first = {
 	hasOutput: true,
 };
 
+cardTypes.reverse = {
+	humanReadableName: "Reverse",
+	cardClass: "function",
+	run: function(inputs, cardData, httpData, requestID) {
+		return new Promise(function(resolve, reject) {
+			return resolve(_.clone(inputs["list"]).reverse());
+		});
+	},
+	inputs: ["list"],
+	hasOutput: true,
+};
+
 cardTypes.firebaseSet = {
 	humanReadableName: "Firebase Set",
 	cardClass: "function",
