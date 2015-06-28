@@ -27,7 +27,15 @@ var DragLayer = React.createClass({
 			var cellWidth = this.props.grid.get("cellWidth");
 
 			return (
-				<Card key={cardId} cardId={cardId} cardData={cardData} x={x} y={y} width={cellWidth} selected={true}/>
+				<Card
+					key={cardId}
+					cardId={cardId}
+					cardData={cardData}
+					x={x}
+					y={y}
+					width={cellWidth}
+					selected={true}
+					graph={this.props.graph} />
 			);
 		}
 	}
