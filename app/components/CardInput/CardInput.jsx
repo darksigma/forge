@@ -31,7 +31,7 @@ var CardInput = React.createClass({
 		})
 		return (
 			<div className={classes}>
-				<SignalIndicator isDropping={signalActive} />
+				<SignalIndicator active={signalActive} />
 				<div className="Label">
 					{this.props.inputName}
 				</div>
