@@ -9,14 +9,20 @@ isNull = function(x){
 	return typeof x !== "undefined" && x !== null;
 }
 
+var runVariable = function(inputs, cardData, httpData, requestID) {
+	return new Promise(function(resolve, reject) {
+		return resolve(cardData.value);
+	})
+};
+
 cardTypes.number = {
 	humanReadableName: "Number",
 	cardClass: "variable",
-	run: function(inputs, cardData, httpData, requestID) {
-		return new Promise(function(resolve, reject) {
-			console.log("reading value ", cardData.value)
-			return resolve(cardData.value);
-		})
+	run: runVariable,
+	initialize: function(cardId, GraphStore) {
+		GraphStore.updateCardData(cardId, {
+			value: 0
+		});
 	},
 	inputs: [],
 	hasOutput: true,

@@ -3,6 +3,7 @@ var Reflux       = require("reflux");
 var Immutable    = require("Immutable");
 var Firebase     = require("firebase");
 var globalConfig = require("../globalConfig.js");
+var Promise      = require("promise");
 
 
 var GraphStore = Reflux.createStore({
@@ -31,22 +32,31 @@ var GraphStore = Reflux.createStore({
 
 
 	updateCardData: function(cardId, update) {
-		var cardRef = this.graphRef_.child("cards").child(cardId);
-		cardRef.transaction(function(oldValue) {
-			return _.assign({}, oldValue, update);
-		});
+		return new Promise(function(resolve, reject) {
+			var cardRef = this.graphRef_.child("cards").child(cardId);
+			cardRef.transaction(function(oldValue) {
+				return _.assign({}, oldValue, update);
+			}, resolve);
+		}.bind(this));
 	},
 
 
 	createCard: function(cardData) {
-		var cardsRef = this.graphRef_.child("cards");
-		cardsRef.push().set(cardData);
+		return new Promise(function(resolve, reject) {
+			var cardsRef = this.graphRef_.child("cards");
+			var newRef = cardsRef.push();
+			newRef.set(cardData, function() {
+				resolve(newRef.key());
+			});
+		}.bind(this));
 	},
 
 
 	setCardInput: function(cardId, inputName, inputValue) {
-		var inputsRef = this.graphRef_.child("cards").child(cardId).child("inputs").child(inputName);
-		inputsRef.set(inputValue);
+		return new Promise(function(resolve, reject) {
+			var inputsRef = this.graphRef_.child("cards").child(cardId).child("inputs").child(inputName);
+			inputsRef.set(inputValue, resolve);
+		}.bind(this));
 	},
 
 
