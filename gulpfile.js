@@ -74,7 +74,7 @@ gulp.task("server", function() {
 	app.use(express.static(publicPath));
 
 	var renderIndex = function(req, res) {
-		fs.readFile(path.join(__dirname, "index.html"), "utf8", function(err, text){
+		fs.readFile(path.join(__dirname, "assets/index.html"), "utf8", function(err, text){
 			res.send(text);
 		});
 	}
