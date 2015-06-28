@@ -13,11 +13,22 @@ var CardLayer = React.createClass({
 
 
 	render: function() {
+		var _this = this;
+		var cellsInView = this.getCellsInView();
+
+		if (this.props.drag.get("cardId")) {
+			var dragCellCoordinates = this.closestCellToDrag(cellsInView);
+		}
+
+		var cells = _.map(cellsInView, function(coordinate) {
+			return _this.renderCell(coordinate, dragCellCoordinates);
+		});
+
 		return (
 			<div className="CardLayer">
 				<div className="Background" onMouseDown={this.handleBackgroundMouseDown}></div>
 				<div className="Cells">
-					{_.map(this.getCellsInView(), this.renderCell)}
+					{cells}
 				</div>
 			</div>
 		);
@@ -56,7 +67,7 @@ var CardLayer = React.createClass({
 	},
 
 
-	renderCell: function(coordinate) {
+	renderCell: function(coordinate, dragCellCoordinates) {
 		var cellWidth  = this.props.grid.get("cellWidth");
 		var x          = (coordinate.x * cellWidth) - this.props.grid.get("transX");
 		var y          = (coordinate.y * cellWidth) - this.props.grid.get("transY");
@@ -78,13 +89,18 @@ var CardLayer = React.createClass({
 			);
 		}
 		else {
+			var isDropping = dragCellCoordinates &&
+				coordinate.x === dragCellCoordinates.x &&
+				coordinate.y === dragCellCoordinates.y;
+
 			return (
 				<EmptyCell
 					key={JSON.stringify(coordinate)}
 					coordinate={coordinate}
 					x={x}
 					y={y}
-					width={cellWidth} />
+					width={cellWidth}
+					active={isDropping} />
 			);
 		}
 	},
@@ -102,6 +118,30 @@ var CardLayer = React.createClass({
 			}
 		});
 		return cardIdForCoordinate;
+	},
+
+
+	closestCellToDrag: function(cellsInView) {
+		var grid         = this.props.grid;
+		var windowHeight = grid.get("windowHeight");
+		var windowWidth  = grid.get("windowWidth");
+		var cellWidth    = grid.get("cellWidth");
+		var transX       = grid.get("transX");
+		var transY       = grid.get("transY");
+
+		var dragX = this.props.drag.get("startX") + this.props.drag.get("offsetX");
+		var dragY = this.props.drag.get("startY") + this.props.drag.get("offsetY");
+
+		var offsetDragX = dragX + transX;
+		var offsetDragY = dragY + transY;
+
+		var cellX = Math.round(offsetDragX / cellWidth);
+		var cellY = Math.round(offsetDragY / cellWidth);
+
+		return {
+			x: cellX,
+			y: cellY
+		};
 	},
 
 
