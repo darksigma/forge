@@ -36,7 +36,7 @@ cardTypes.httpResponse = {
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
 			console.log("answer ", inputs.data)
-			Request.post('http://api.f0rge.io/complete/' + requestID, {"answer":inputs.data})
+			Request.post('http://api.f0rge.io/complete/' + requestID, {"form":{"answer":inputs.data}})
 			return resolve(inputs.data);
 		})
 	},
