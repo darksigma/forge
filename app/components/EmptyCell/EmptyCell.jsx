@@ -13,6 +13,16 @@ var EmptyCell = React.createClass({
 
 	mixins: [PureRenderMixin, Draggable, Droppable],
 
+	componentDidMount: function() {
+		document.addEventListener("mousedown", this.handleDocumentMouseDown);
+	},
+
+
+	componentWillUnmount: function() {
+		document.addEventListener("mousedown", this.handleDocumentMouseDown);
+	},
+
+
 	getInitialState: function() {
 		return {
 			showAddCardMenu: false
@@ -59,6 +69,15 @@ var EmptyCell = React.createClass({
 	/*
 		Events
 	*/
+
+	handleDocumentMouseDown: function(e) {
+		if (!this.getDOMNode().contains(e.target)) {
+			this.setState({
+				showAddCardMenu: false
+			});
+		}
+	},
+
 
 	handleDoubleClick: function(e) {
 		e.preventDefault();

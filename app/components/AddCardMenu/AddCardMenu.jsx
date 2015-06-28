@@ -12,7 +12,6 @@ var AddCardMenu = React.createClass({
 
 	mixins: [PureRenderMixin],
 
-
 	render: function() {
 		return (
 			<div className="AddCardMenu">
@@ -28,7 +27,7 @@ var AddCardMenu = React.createClass({
 		return _.map(cardTypes, function(cardTypeData, cardTypeName) {
 			return <AddCardMenuOption cardTypeData={cardTypeData} cardTypeName={cardTypeName} />
 		}.bind(this));
-	}
+	},
 
 });
 
