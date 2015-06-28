@@ -1,11 +1,12 @@
-var React           = require("react/addons");
-var classSet        = React.addons.classSet;
-var PureRenderMixin = React.addons.PureRenderMixin;
-var cardTypes       = require("../../../cardTypes.js");
-var FunctionCard    = require("../FunctionCard/FunctionCard.jsx")
-var VariableCard    = require("../VariableCard/VariableCard.jsx")
-var Draggable       = require("../../mixins/Draggable.jsx");
-var SignalIndicator = require("../SignalIndicator/SignalIndicator.jsx")
+var React            = require("react/addons");
+var classSet         = React.addons.classSet;
+var PureRenderMixin  = React.addons.PureRenderMixin;
+var cardTypes        = require("../../../cardTypes.js");
+var FunctionCard     = require("../FunctionCard/FunctionCard.jsx")
+var VariableCard     = require("../VariableCard/VariableCard.jsx")
+var Draggable        = require("../../mixins/Draggable.jsx");
+var SignalIndicator  = require("../SignalIndicator/SignalIndicator.jsx")
+var selectionActions = require("../../actions/selectionActions.js");
 
 
 var Card = React.createClass({
@@ -25,8 +26,13 @@ var Card = React.createClass({
 			transform: "translate(" + this.props.x + "px," + this.props.y + "px)"
 		};
 
+		var classes = classSet({
+			Card: true,
+			selected: this.props.selected,
+		});
+
 		return (
-			<div className="Card" style={rootStyle}>
+			<div className={classes} style={rootStyle} onMouseDown={this.handleMouseDown}>
 				<div className="CardInner">
 					<div className="Header">
 						<div className="Icon"></div>
@@ -64,9 +70,14 @@ var Card = React.createClass({
 		}
 	},
 
+
 	/*
 		Events
 	*/
+
+	handleMouseDown: function() {
+		selectionActions.selectCard(this.props.cardId);
+	},
 
 
 	handleDragStart: function(e){
