@@ -28,6 +28,7 @@ selectionActions.selectCard = function(cardId) {
 
 
 selectionActions.selectLink = function(cardId, inputName) {
+	console.log('yo');
 	return new Promise(function(resolve, reject) {
 		SelectionStore.setSelectedData(Immutable.Map({
 			type: "input",

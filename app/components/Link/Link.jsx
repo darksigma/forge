@@ -10,6 +10,8 @@ var signalProperties = require("../../helpers/signalProperties.js");
 var cardSizing       = require("../../helpers/cardSizing.js");
 var cardTypes        = require("../../cardTypes");
 
+var selectionActions = require("../../actions/selectionActions.js");
+var SelectionStore   = require("../../stores/SelectionStore.js");
 
 var Link = React.createClass({
 
@@ -27,19 +29,39 @@ var Link = React.createClass({
 		var start = this.calculateStart(startCard, cardId, grid);
 		var stop = this.calculateStop(card, i, grid);
 		var path = this.calculatePath(start, stop, card, startCard, grid);
-		return this.drawSignal(grid, path, c.signal);
+		return this.drawSignal(grid, path, card, cardId, c.signal);
 	},
 
-	drawSignal: function(grid, points, color) {
+	drawSignal: function(grid, points, card, cardId, color) {
 		var pointString = _.reduce(points, function(memo, num) {
 			return memo + num[0] + " " + num[1] + " ";
 		}, "M");
 
+		var select = false;
+		var selected = this.props.selection.get("selectedData");
+		console.log('......');
+		console.log(this.props.inputName);
+		console.log(selected.get("cardId"));
+		console.log(selected.get("inputName"));
+		console.log(selected.get("type"));
+		if(selected.get("type") == "input" && this.props.inputName == selected.get("inputName") && cardId == selected.get("cardId")) {
+			console.log(card);
+			select = true;
+		}
+		var classes = classSet({
+			signal: true,
+			sel: select,
+		});
+
 		return (
 			<g className="Link">
-				<path className="signal" d={pointString}></path>
+				<path className={classes} d={pointString} onMouseDown={this.handleMouseDown}></path>
 			</g>
 		);
+	},
+
+	handleMouseDown: function() {
+		selectionActions.selectLink(this.props.cardId, this.props.inputName);
 	},
 
 	calculateStart: function(startCard, cardId, grid) {
