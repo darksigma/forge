@@ -37,14 +37,17 @@ cardTypes.httpResponse = {
 		return new Promise(function(resolve, reject) {
 			console.log("answer ", inputs.data)
 			Request.post({
-				url: globalConfig.httpServerUrl + '/complete/' + requestID,
+				url: globalConfig.httpServerUrl + 'complete/' + requestID,
 				json: true,
 				body: {
 					answer: inputs.data
 				}
-			}, function(err) {
-				if(err) {
-					reject(err);
+			}, function(error, response, body) {
+				console.log("REQUEST");
+				console.log("error: ", error);
+				console.log("body: ", body);
+				if(error) {
+					reject(error);
 				}
 				else {
 					resolve();
