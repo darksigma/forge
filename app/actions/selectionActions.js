@@ -44,7 +44,30 @@ selectionActions.deleteSelection = function() {
 	return new Promise(function(resolve, reject) {
 		var selectedData = SelectionStore.getData().get("selectedData");
 		if (selectedData && selectedData.get("type") === "card") {
-			GraphStore.deleteCard(selectedData.get("cardId"));
+			var cards         = GraphStore.getData().cards;
+			var deletedCardId = selectedData.get("cardId");
+
+			cardInputPairs = _.map(cards, function(cardValue, cardId) {
+				return _.map(cardValue.inputs || [], function(inputValue, inputName) {
+					return {
+						cardId: cardId,
+						inputName: inputName,
+						inputValue: inputValue,
+					}
+				});
+			});
+
+			cardInputPairs = _.union.apply(null, cardInputPairs);
+
+			pairsWithDeletedInput = _.filter(cardInputPairs, function(pair) {
+				return pair.inputValue === deletedCardId;
+			});
+
+			Promise.all(_.map(pairsWithDeletedInput, function(pair) {
+				return GraphStore.setCardInput(pair.cardId, pair.inputName, null);
+			})).then(function() {
+				return GraphStore.deleteCard(selectedData.get("cardId"));
+			});
 		}
 		else if (selectedData && selectedData.get("type") === "input") {
 			GraphStore.setCardInput(selectedData.get("cardId"), selectedData.get("inputName"), null);
