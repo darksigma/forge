@@ -1,5 +1,6 @@
 var Promise = require("promise");
 var Request = require("request");
+var _ = require("lodash"); 
 var globalConfig = require("./globalConfig");
 
 var cardTypes = {};
@@ -108,15 +109,15 @@ cardTypes.multiply = {
 	hasOutput: true,
 };
 
-cardTypes.sort = {
+cardTypes.sortBy = {
 	humanReadableName: "SortBy",
 	cardClass: "function",
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
-			return resolve(inputs["number1"] * inputs["number2"]);
+			return resolve(_.sortBy(inputs["list"], inputs["sortKey"]));
 		});
 	},
-	inputs: ["number1", "number2"],
+	inputs: ["list", "sortKey"],
 	hasOutput: true,
 };
 
