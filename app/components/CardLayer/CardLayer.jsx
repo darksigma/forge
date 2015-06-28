@@ -26,7 +26,6 @@ var CardLayer = React.createClass({
 
 		return (
 			<div className="CardLayer">
-				<div className="Background" onMouseDown={this.handleBackgroundMouseDown}></div>
 				<div className="Cells">
 					{cells}
 				</div>
@@ -142,15 +141,6 @@ var CardLayer = React.createClass({
 			x: cellX,
 			y: cellY
 		};
-	},
-
-
-	/*
-		Events
-	*/
-
-	handleBackgroundMouseDown: function() {
-		selectionActions.clearSelection();
 	},
 
 });
