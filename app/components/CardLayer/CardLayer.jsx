@@ -3,7 +3,6 @@ var React            = require("react/addons");
 var classSet         = React.addons.classSet;
 var PureRenderMixin  = React.addons.PureRenderMixin;
 var Card             = require("../Card/Card.jsx");
-var EmptyCell        = require("../EmptyCell/EmptyCell.jsx");
 var selectionActions = require("../../actions/selectionActions.js");
 var gridHelpers      = require("../../helpers/gridHelpers.js");
 
@@ -17,25 +16,19 @@ var CardLayer = React.createClass({
 		var _this = this;
 		var cellsInView = gridHelpers.getCellsInView(this.props.grid);
 
-		if (this.props.drag.get("cardId")) {
-			var dragCellCoordinates = gridHelpers.closestCellToDrag(cellsInView, this.props.grid, this.props.drag);
-		}
-
 		var cells = _.map(cellsInView, function(coordinate) {
-			return _this.renderCell(coordinate, dragCellCoordinates);
+			return _this.renderCell(coordinate);
 		});
 
 		return (
 			<div className="CardLayer">
-				<div className="Cells">
-					{_.compact(cells)}
-				</div>
+				{_.compact(cells)}
 			</div>
 		);
 	},
 
 
-	renderCell: function(coordinate, dragCellCoordinates) {
+	renderCell: function(coordinate) {
 		var cellWidth  = this.props.grid.get("cellWidth");
 		var x          = (coordinate.x * cellWidth) - this.props.grid.get("transX");
 		var y          = (coordinate.y * cellWidth) - this.props.grid.get("transY");
@@ -62,24 +55,7 @@ var CardLayer = React.createClass({
 					selected={isSelected}/>
 			);
 		}
-		else {
-			var isDropping = dragCellCoordinates &&
-				coordinate.x === dragCellCoordinates.x &&
-				coordinate.y === dragCellCoordinates.y;
-
-			return (
-				<EmptyCell
-					key={JSON.stringify(coordinate)}
-					coordinate={coordinate}
-					x={x}
-					y={y}
-					width={cellWidth}
-					active={isDropping}
-					grid={this.props.grid} />
-			);
-		}
 	},
-
 
 });
 
