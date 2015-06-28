@@ -66,9 +66,13 @@ exports.handler = function(event, context) {
     root.child("graphs").child(graph_id).once('value', function(snap) {
         var graphData = snap.val();
         var cards = graphData.cards;
-        var responseCardIds = _.filter(cards.keys, function(key){
-            cards[key].type === "httpResponse";
+
+        cardIds = Object.keys(cards);
+        var responseCardIds = _.filter(cardIds, function(cardId, index){
+            return cards[cardId].type === "httpResponse";
         });
+
+        console.log(responseCardIds);
 
         evalAll = Promise.all(_.map(responseCardIds, function(responseCardId) {
             return evaluateCard(cards, responseCardId, message.data, message.requestId)
@@ -83,4 +87,4 @@ exports.handler = function(event, context) {
 };
 
 
-// exports.handler({'Records':[{'Sns':{'Message':'{"graphId":"test-graph-nikhil","nodeId":"http-get-1","requestId":"6ac4c128-eb33-4577-b9b0-ce6700358974", "data":{}}'}}]}, null);
+// exports.handler({'Records':[{'Sns':{'Message':'{"graphId":"test-graph-nikhil","nodeId":"http-get-1","requestId":"f1c49d21-74f3-4081-a709-7a5e9a518e36", "data":{}}'}}]}, null);
