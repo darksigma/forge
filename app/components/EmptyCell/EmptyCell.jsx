@@ -2,13 +2,15 @@ var React            = require("react/addons");
 var classSet         = React.addons.classSet;
 var PureRenderMixin  = React.addons.PureRenderMixin;
 var Draggable        = require("../../mixins/Draggable.jsx");
+var Droppable        = require("../../mixins/Droppable.jsx");
 var selectionActions = require("../../actions/selectionActions.js");
-var gridActions = require("../../actions/gridActions.js");
+var gridActions      = require("../../actions/gridActions.js");
+var dragActions      = require("../../actions/dragActions.js");
 
 
 var EmptyCell = React.createClass({
 
-	mixins: [PureRenderMixin, Draggable],
+	mixins: [PureRenderMixin, Draggable, Droppable],
 
 
 	render: function() {
@@ -28,6 +30,14 @@ var EmptyCell = React.createClass({
 			</div>
 		);
 	},
+
+
+	handleDrop: function(dragData) {
+		if (dragData && dragData.get("type") === "card") {
+			dragActions.dropCardInCell(dragData.get("cardId"), this.props.coordinate);
+		}
+	},
+
 
 	/*
 		Events

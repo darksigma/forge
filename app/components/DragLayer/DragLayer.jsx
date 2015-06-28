@@ -18,12 +18,13 @@ var DragLayer = React.createClass({
 	},
 
 	renderDraggingCard: function() {
-		var cardId = this.props.drag.get("cardId");
+		var dragData = this.props.drag.get("dragData");
 
-		if (cardId) {
-			var cardData  = this.props.graph.cards[cardId]
-			var x         = this.props.drag.get("startX") + this.props.drag.get("offsetX");
-			var y         = this.props.drag.get("startY") + this.props.drag.get("offsetY");
+		if (dragData && dragData.get("type") === "card") {
+			var cardId    = dragData.get("cardId");
+			var cardData  = this.props.graph.cards[cardId];
+			var x         = this.props.drag.get("startX") + this.props.drag.get("offsetX") - (this.props.grid.get("cellWidth") / 2);
+			var y         = this.props.drag.get("startY") + this.props.drag.get("offsetY") - (this.props.grid.get("cellWidth") / 2);
 			var cellWidth = this.props.grid.get("cellWidth");
 
 			return (
