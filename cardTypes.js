@@ -7,7 +7,7 @@ var cardTypes = {};
 
 cardTypes.number = {
 	humanReadableName: "Number",
-	cardClass: "Variable",
+	cardClass: "variable",
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
 			return resolve(cardData.value);
