@@ -6,7 +6,7 @@ var globalConfig = require("./globalConfig");
 
 var cardTypes = {};
 
-isNull = function(x){
+isNotNull = function(x){
 	return typeof x !== "undefined" && x !== null;
 }
 
@@ -84,7 +84,7 @@ cardTypes.httpResponse = {
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
 			console.log("answer ", inputs.data)
-			if (!isNull(inputs.data)){
+			if (isNotNull(inputs.data)){
 				Request.post({
 					url: globalConfig.httpServerUrl + 'complete/' + requestID,
 					json: true,
