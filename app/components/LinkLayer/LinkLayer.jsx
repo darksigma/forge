@@ -46,6 +46,7 @@ var LinkLayer = React.createClass({
 										cards={cards}
 										i={i}
 										selection={this.props.selection}
+										hover={this.props.hover}
 										inputName={inputs[j]}
 										cardId={cardId}
 										startCard={startCard}

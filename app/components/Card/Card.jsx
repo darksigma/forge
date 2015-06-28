@@ -34,8 +34,8 @@ var Card = React.createClass({
 
 		var classes = classSet({
 			Card: true,
-			hovered: this.props.hovered,
 			selected: this.props.selected,
+			hovered: this.props.hovered,
 		});
 
 		var lambdaType = cardTypes[this.props.cardData.type];
@@ -48,7 +48,8 @@ var Card = React.createClass({
 						<div className="Name">{this.getCardName()}</div>
 						<CardOutput
 							graph={this.props.graph}
-							cardId={this.props.cardId} />
+							cardId={this.props.cardId}
+							drag={this.props.drag} />
 					</div>
 					<div className="CardUI">
 						{this.renderCardClass()}
@@ -79,7 +80,8 @@ var Card = React.createClass({
 				<Handler
 					cardId={this.props.cardId}
 					cardData={this.props.cardData}
-					graph={this.props.graph} />
+					graph={this.props.graph}
+					drag={this.props.drag} />
 			)
 		}
 	},
@@ -91,7 +93,7 @@ var Card = React.createClass({
 
 	handleMouseDown: function() {
 		selectionActions.selectCard(this.props.cardId);
-		hoverActions.clearHover();
+		//hoverActions.clearHover();
 	},
 
 
