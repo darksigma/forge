@@ -10,7 +10,8 @@ var SignalIndicator = React.createClass({
 
 	render: function() {
 		var classes = classSet({
-			SignalIndicator: true
+			SignalIndicator: true,
+			active: this.props.active,
 		})
 		return (
 			<div className={classes}>
