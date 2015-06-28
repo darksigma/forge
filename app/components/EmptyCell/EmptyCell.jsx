@@ -4,13 +4,31 @@ var PureRenderMixin  = React.addons.PureRenderMixin;
 var Draggable        = require("../../mixins/Draggable.jsx");
 var Droppable        = require("../../mixins/Droppable.jsx");
 var selectionActions = require("../../actions/selectionActions.js");
+var hoverActions = require("../../actions/hoverActions.js");
 var gridActions      = require("../../actions/gridActions.js");
 var dragActions      = require("../../actions/dragActions.js");
+var AddCardMenu      = require("../AddCardMenu/AddCardMenu.jsx")
 
 
 var EmptyCell = React.createClass({
 
 	mixins: [PureRenderMixin, Draggable, Droppable],
+
+	componentDidMount: function() {
+		document.addEventListener("mousedown", this.handleDocumentMouseDown);
+	},
+
+
+	componentWillUnmount: function() {
+		document.removeEventListener("mousedown", this.handleDocumentMouseDown);
+	},
+
+
+	getInitialState: function() {
+		return {
+			showAddCardMenu: false
+		};
+	},
 
 
 	render: function() {
@@ -25,8 +43,20 @@ var EmptyCell = React.createClass({
 			active: this.props.active
 		});
 
+		if (this.state.showAddCardMenu) {
+			var addCardMenu = (
+				<AddCardMenu
+					coordinate={this.props.coordinate} />
+			)
+		}
+
 		return (
-			<div className={classes} style={rootStyle} onMouseDown={this.handleMouseDown}>
+			<div className={classes}
+				style={rootStyle}
+				onMouseDown={this.handleMouseDown}
+				onMouseOver={this.onMouseEnter}
+				onDoubleClick={this.handleDoubleClick}>
+				{addCardMenu}
 			</div>
 		);
 	},
@@ -43,8 +73,30 @@ var EmptyCell = React.createClass({
 		Events
 	*/
 
+	handleDocumentMouseDown: function(e) {
+		if (!this.getDOMNode().contains(e.target)) {
+			this.setState({
+				showAddCardMenu: false
+			});
+		}
+	},
+
+
+	handleDoubleClick: function(e) {
+		e.preventDefault();
+		this.setState({
+			showAddCardMenu: true
+		});
+	},
+
+
 	handleMouseDown: function() {
 		selectionActions.clearSelection();
+	},
+
+
+	onMouseEnter: function() {
+		hoverActions.clearHover();
 	},
 
 

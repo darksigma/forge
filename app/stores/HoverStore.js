@@ -3,12 +3,11 @@ var Reflux    = require("reflux");
 var Immutable = require("Immutable");
 
 
-var SelectionStore = Reflux.createStore({
+var HoverStore = Reflux.createStore({
 
 	init: function(){
 		this.data_ = Immutable.fromJS({
-			selectedData: Immutable.Map({
-			})
+			hoverCard: null
 		});
 	},
 
@@ -18,12 +17,12 @@ var SelectionStore = Reflux.createStore({
 	},
 
 
-	setSelectedData: function(selectedData) {
-		this.data_ = this.data_.set("selectedData", selectedData);
+	setHoveredCard: function(cardId) {
+		this.data_ = this.data_.set("hoverCard", cardId);
 		this.trigger(this.data_);
 	},
 
 });
 
 
-module.exports = SelectionStore;
+module.exports = HoverStore;

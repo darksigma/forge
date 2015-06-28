@@ -10,6 +10,7 @@ var DragLayer       = require("../DragLayer/DragLayer.jsx")
 var GraphStore      = require("../../stores/GraphStore.js");
 var GridStore       = require("../../stores/GridStore.js");
 var SelectionStore  = require("../../stores/SelectionStore.js");
+var HoverStore      = require("../../stores/HoverStore.js");
 var DragStore       = require("../../stores/DragStore.js");
 
 
@@ -20,16 +21,17 @@ var App = React.createClass({
 		Reflux.connect(GraphStore, "graph"),
 		Reflux.connect(GridStore, "grid"),
 		Reflux.connect(SelectionStore, "selection"),
+		Reflux.connect(HoverStore, "hover"),
 		Reflux.connect(DragStore, "drag"),
 	],
 
 	render: function() {
 		return (
 			<div className="App">
-				<GridLayer graph={this.state.graph} grid={this.state.grid} selection={this.state.selection} drag={this.state.drag} />
-				<LinkLayer graph={this.state.graph} grid={this.state.grid} selection={this.state.selection} drag={this.state.drag} />
-				<CardLayer graph={this.state.graph} grid={this.state.grid} selection={this.state.selection} drag={this.state.drag} />
-				<DragLayer graph={this.state.graph} grid={this.state.grid} selection={this.state.selection} drag={this.state.drag} />
+				<GridLayer graph={this.state.graph} grid={this.state.grid} selection={this.state.selection} hover={this.state.hover} drag={this.state.drag} />
+				<LinkLayer graph={this.state.graph} grid={this.state.grid} selection={this.state.selection} hover={this.state.hover} drag={this.state.drag} />
+				<CardLayer graph={this.state.graph} grid={this.state.grid} selection={this.state.selection} hover={this.state.hover} drag={this.state.drag} />
+				<DragLayer graph={this.state.graph} grid={this.state.grid} selection={this.state.selection} hover={this.state.hover} drag={this.state.drag} />
 				<img className="Logo" src="/assets/forge.svg"></img>
 			</div>
 		);

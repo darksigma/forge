@@ -9,6 +9,7 @@ var VariableCard     = require("../VariableCard/VariableCard.jsx")
 var Draggable        = require("../../mixins/Draggable.jsx");
 var CardOutput       = require("../CardOutput/CardOutput.jsx")
 var selectionActions = require("../../actions/selectionActions.js");
+var hoverActions = require("../../actions/hoverActions.js");
 var dragActions      = require("../../actions/dragActions.js");
 
 
@@ -31,14 +32,17 @@ var Card = React.createClass({
 
 		var classes = classSet({
 			Card: true,
+			hovered: this.props.hovered,
 			selected: this.props.selected,
 		});
 
+		var lambdaType = cardTypes[this.props.cardData.type];
+
 		return (
-			<div className={classes} style={rootStyle} onMouseDown={this.handleMouseDown}>
+			<div className={classes} style={rootStyle} onMouseOver={this.onMouseEnter} onMouseDown={this.handleMouseDown}>
 				<div className="CardInner">
 					<div className="Header">
-						<div className="Icon"></div>
+						<img className="Icon" src={lambdaType.icon} />
 						<div className="Name">{this.getCardName()}</div>
 						<CardOutput
 							graph={this.props.graph}
@@ -84,6 +88,12 @@ var Card = React.createClass({
 
 	handleMouseDown: function() {
 		selectionActions.selectCard(this.props.cardId);
+		hoverActions.clearHover();
+	},
+
+
+	onMouseEnter: function() {
+		hoverActions.hoverCard(this.props.cardId);
 	},
 
 

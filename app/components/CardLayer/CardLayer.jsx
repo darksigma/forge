@@ -42,7 +42,9 @@ var CardLayer = React.createClass({
 		}
 
 		if (cardIdForCoordinate && !isDraggingCard) {
-			var isSelected     = this.props.selection.get("selectedCard") === cardIdForCoordinate;
+			var selectedData = this.props.selection.get("selectedData");
+			var isSelected   = selectedData.get("type") === "card" && selectedData.get("cardId") === cardIdForCoordinate;
+			var isHovered      = this.props.hover.get("hoverCard") === cardIdForCoordinate;
 			var cardData       = this.props.graph.cards[cardIdForCoordinate];
 
 			return (
@@ -54,6 +56,7 @@ var CardLayer = React.createClass({
 					y={y}
 					width={cellWidth}
 					selected={isSelected}
+					hovered={isHovered}
 					graph={this.props.graph} />
 			);
 		}
