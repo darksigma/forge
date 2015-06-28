@@ -23,6 +23,7 @@ var App = React.createClass({
 				<GridLayer graph={this.state.graph} grid={this.state.grid} />
 				<LinkLayer graph={this.state.graph} grid={this.state.grid} />
 				<CardLayer graph={this.state.graph} grid={this.state.grid} />
+				<img className="Logo" src="/assets/forge.svg"></img>
 			</div>
 		);
 	}
