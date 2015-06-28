@@ -32,7 +32,6 @@ var Card = React.createClass({
 			transform: "translate(" + this.props.x + "px," + this.props.y + "px)"
 		};
 
-		console.log(this.props.hovered);
 		var classes = classSet({
 			Card: true,
 			selected: this.props.selected,
