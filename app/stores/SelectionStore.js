@@ -18,6 +18,11 @@ var SelectionStore = Reflux.createStore({
 	},
 
 
+	getData: function() {
+		return this.data_;
+	},
+
+
 	setSelectedData: function(selectedData) {
 		this.data_ = this.data_.set("selectedData", selectedData);
 		this.trigger(this.data_);

@@ -52,6 +52,14 @@ var GraphStore = Reflux.createStore({
 	},
 
 
+	deleteCard: function(cardId) {
+		return new Promise(function(resolve, reject) {
+			var cardRef = this.graphRef_.child("cards").child(cardId);
+			cardRef.set(null, resolve);
+		}.bind(this));
+	},
+
+
 	setCardInput: function(cardId, inputName, inputValue) {
 		return new Promise(function(resolve, reject) {
 			var inputsRef = this.graphRef_.child("cards").child(cardId).child("inputs").child(inputName);

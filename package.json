@@ -25,6 +25,7 @@
     "http": "0.0.0",
     "immutable": "^3.7.2",
     "js.class": "^2.5.1",
+    "keymaster": "^1.6.2",
     "lodash": "^3.6.0",
     "mousetrap": "^1.4.6",
     "nib": "^1.1.0",
