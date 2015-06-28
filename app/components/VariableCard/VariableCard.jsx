@@ -1,6 +1,7 @@
 var React           = require("react/addons");
 var classSet        = React.addons.classSet;
 var PureRenderMixin = React.addons.PureRenderMixin;
+var cardActions     = require("../../actions/cardActions.js");
 
 
 var VariableCard = React.createClass({
@@ -11,13 +12,16 @@ var VariableCard = React.createClass({
 	render: function() {
 		return (
 			<div className="VariableCard">
-				<input className="Input" value={JSON.stringify(this.props.cardData.value)} onChange={this.handleInputChange}></input>
+				<input className="Input IgnoreDrag" defaultValue={this.props.cardData.value} onKeyDown={this.handleInputKeyDown}></input>
 			</div>
 		);
 	},
 
-	handleInputChange: function(e) {
 
+	handleInputKeyDown: function(e) {
+		if (e.keyCode === 13) {
+			cardActions.editCardVariable(this.props.cardId, e.target.value);
+		}
 	},
 
 });

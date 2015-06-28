@@ -28,4 +28,11 @@ cardActions.createCardAtCell = function(cardType, coordinate) {
 };
 
 
+cardActions.editCardVariable = function(cardId, variableValue) {
+	return GraphStore.updateCardData(cardId, {
+		value: variableValue
+	});
+};
+
+
 module.exports = cardActions

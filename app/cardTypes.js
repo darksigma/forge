@@ -12,7 +12,12 @@ isNotNull = function(x){
 
 var runVariable = function(inputs, cardData, httpData, requestID) {
 	return new Promise(function(resolve, reject) {
-		return resolve(cardData.value);
+		try {
+			var parsed = JSON.parse(cardData.value);
+			return resolve(parsed);
+		} catch (e) {
+			return resolve(cardData.value)
+		}
 	})
 };
 
@@ -20,11 +25,6 @@ cardTypes.number = {
 	humanReadableName: "Number",
 	cardClass: "variable",
 	run: runVariable,
-	initialize: function(cardId, GraphStore) {
-		GraphStore.updateCardData(cardId, {
-			value: 0
-		});
-	},
 	inputs: [],
 	hasOutput: true,
 };
@@ -33,11 +33,6 @@ cardTypes.string = {
 	humanReadableName: "String",
 	cardClass: "variable",
 	run: runVariable,
-	initialize: function(cardId, GraphStore) {
-		GraphStore.updateCardData(cardId, {
-			value: ""
-		});
-	},
 	inputs: [],
 	hasOutput: true,
 };

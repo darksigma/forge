@@ -16,7 +16,13 @@ var Draggable = {
 
 
 	draggableMouseDown: function(e) {
-		dragHandler.mouseDownComponent(e, this);
+		var el = e.target;
+		var matchesSelector = el.webkitMatchesSelector || el.mozMatchesSelector || el.oMatchesSelector || el.matchesSelector;
+
+		// HACK.
+		if (!matchesSelector.call(el, ".IgnoreDrag, .IgnoreDrag *")) {
+			dragHandler.mouseDownComponent(e, this);
+		}
 	},
 
 };
