@@ -27,7 +27,7 @@ var CardLayer = React.createClass({
 		return (
 			<div className="CardLayer">
 				<div className="Cells">
-					{cells}
+					{_.compact(cells)}
 				</div>
 			</div>
 		);
@@ -73,9 +73,15 @@ var CardLayer = React.createClass({
 
 		var cardIdForCoordinate = this.getCardIdForCoordinate(coordinate);
 
+		var isDraggingCard = false
 		if (cardIdForCoordinate) {
-			var isSelected = this.props.selection.get("selectedCard") === cardIdForCoordinate;
-			var cardData = this.props.graph.cards[cardIdForCoordinate]
+			isDraggingCard = this.props.drag.get("cardId") === cardIdForCoordinate;
+		}
+
+		if (cardIdForCoordinate && !isDraggingCard) {
+			var isSelected     = this.props.selection.get("selectedCard") === cardIdForCoordinate;
+			var cardData       = this.props.graph.cards[cardIdForCoordinate];
+
 			return (
 				<Card
 					key={cardIdForCoordinate}
