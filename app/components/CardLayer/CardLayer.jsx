@@ -99,7 +99,8 @@ var CardLayer = React.createClass({
 					x={x}
 					y={y}
 					width={cellWidth}
-					active={isDropping} />
+					active={isDropping}
+					grid={this.props.grid} />
 			);
 		}
 	},

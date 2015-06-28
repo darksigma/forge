@@ -25,6 +25,12 @@ var GridStore = Reflux.createStore({
 	},
 
 
+	updateData: function(update) {
+		this.data_ = this.data_.merge(update);
+		this.trigger(this.data_);
+	},
+
+
 	handleResize_: function(e) {
 		this.data_ = this.data_.set("windowWidth", window.innerWidth);
 		this.data_ = this.data_.set("windowHeight", window.innerHeight);
