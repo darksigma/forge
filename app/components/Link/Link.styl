@@ -2,13 +2,13 @@
 	pointer-events: none
 	absolute-fill()
 
-	.sel
-		stroke: orange !important
-
-	.signal
-		stroke: alpha($link-color, 0.5)
+	path.signal
+		stroke: alpha($link-color, 0.3)
 		stroke-width: 7px
 		fill: none
 		vector-effect: non-scaling-stroke
 		stroke-linejoin: round
 		pointer-events: auto
+
+		&.sel
+			stroke: alpha($link-color, 0.8)
