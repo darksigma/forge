@@ -31,6 +31,13 @@ var CardInput = React.createClass({
 	},
 
 
+	handleDrop: function(dragData) {
+		if (dragData && dragData.get("type") === "output") {
+			dragActions.createLink(dragData.get("cardId"), this.props.cardId, this.props.inputName);
+		}
+	},
+
+
 	/*
 		Events
 	*/

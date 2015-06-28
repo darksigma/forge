@@ -39,6 +39,30 @@ var CardOutput = React.createClass({
 		}
 	},
 
+
+	/*
+		Events
+	*/
+
+	handleDragStart: function(e){
+		this.startGlobalX = e.globalX;
+		this.startGlobalY = e.globalY;
+		dragActions.startDrag(Immutable.Map({
+			type: "output",
+			cardId: this.props.cardId,
+		}), e.globalX, e.globalY, e.currentX - e.globalX, e.currentY - e.globalY);
+	},
+
+
+	handleDragMove: function(e){
+		dragActions.continueDrag(e.currentTarget, e.globalX - this.startGlobalX, e.globalY - this.startGlobalY);
+	},
+
+
+	handleDragEnd: function(e){
+		dragActions.endDrag();
+	},
+
 });
 
 
