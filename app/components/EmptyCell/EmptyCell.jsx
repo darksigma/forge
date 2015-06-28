@@ -4,6 +4,7 @@ var PureRenderMixin  = React.addons.PureRenderMixin;
 var Draggable        = require("../../mixins/Draggable.jsx");
 var Droppable        = require("../../mixins/Droppable.jsx");
 var selectionActions = require("../../actions/selectionActions.js");
+var hoverActions = require("../../actions/hoverActions.js");
 var gridActions      = require("../../actions/gridActions.js");
 var dragActions      = require("../../actions/dragActions.js");
 var AddCardMenu      = require("../AddCardMenu/AddCardMenu.jsx")
@@ -52,6 +53,7 @@ var EmptyCell = React.createClass({
 			<div className={classes}
 				style={rootStyle}
 				onMouseDown={this.handleMouseDown}
+				onMouseOver={this.onMouseEnter}
 				onDoubleClick={this.handleDoubleClick}>
 				{addCardMenu}
 			</div>
@@ -89,6 +91,11 @@ var EmptyCell = React.createClass({
 
 	handleMouseDown: function() {
 		selectionActions.clearSelection();
+	},
+
+
+	onMouseEnter: function() {
+		hoverActions.clearHover();
 	},
 
 
