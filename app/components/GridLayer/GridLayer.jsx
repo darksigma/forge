@@ -40,9 +40,10 @@ var GridLayer = React.createClass({
 
 
 	renderCell: function(coordinate, dragCellCoordinates) {
-		var cellWidth  = this.props.grid.get("cellWidth");
-		var x          = (coordinate.x * cellWidth) - this.props.grid.get("transX");
-		var y          = (coordinate.y * cellWidth) - this.props.grid.get("transY");
+		var cellWidth           = this.props.grid.get("cellWidth");
+		var x                   = (coordinate.x * cellWidth) - this.props.grid.get("transX");
+		var y                   = (coordinate.y * cellWidth) - this.props.grid.get("transY");
+		var cardIdForCoordinate = gridHelpers.getCardIdForCoordinate(coordinate, this.props.graph.cards);
 
 		var isDropping = dragCellCoordinates &&
 			coordinate.x === dragCellCoordinates.x &&
@@ -55,7 +56,7 @@ var GridLayer = React.createClass({
 				x={x}
 				y={y}
 				width={cellWidth}
-				active={isDropping}
+				active={isDropping || cardIdForCoordinate}
 				grid={this.props.grid} />
 		);
 	},
