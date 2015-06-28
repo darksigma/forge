@@ -25,7 +25,12 @@ var AddCardMenu = React.createClass({
 
 	renderOptions: function() {
 		return _.map(cardTypes, function(cardTypeData, cardTypeName) {
-			return <AddCardMenuOption cardTypeData={cardTypeData} cardTypeName={cardTypeName} />
+			return (
+				<AddCardMenuOption
+					cardTypeData={cardTypeData}
+					cardTypeName={cardTypeName}
+					coordinate={this.props.coordinate} />
+			);
 		}.bind(this));
 	},
 

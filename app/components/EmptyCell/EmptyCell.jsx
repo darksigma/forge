@@ -45,7 +45,8 @@ var EmptyCell = React.createClass({
 
 		if (this.state.showAddCardMenu) {
 			var addCardMenu = (
-				<AddCardMenu />
+				<AddCardMenu
+					coordinate={this.props.coordinate} />
 			)
 		}
 
