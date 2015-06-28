@@ -32,7 +32,6 @@ evaluateCard = function(cards, cardId, httpData, requestId) {
 
         var inputsComputed = _.map(typeInfo.inputs || [], function(inputLabel) {
             var inputCardId = cards[cardId].inputs[inputLabel];
-            console.log("calling evaluate with ", inputCardId, " and data ", cards[inputCardId])
             return evaluateCard(cards, inputCardId, httpData, requestId);  
         });
         Promise.all(inputsComputed).then(function(values){
@@ -41,6 +40,7 @@ evaluateCard = function(cards, cardId, httpData, requestId) {
                 inputs[typeInfo.inputs[i]] = value;
             });
 
+            console.log("running with ", inputCardId, " and data ", cards[inputCardId])
             typeInfo.run(inputs, cards[cardId], httpData, requestId)
             .then(function(output) {
                 return resolve(output);

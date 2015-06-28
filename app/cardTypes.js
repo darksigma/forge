@@ -12,6 +12,7 @@ isNotNull = function(x){
 
 var runVariable = function(inputs, cardData, httpData, requestID) {
 	return new Promise(function(resolve, reject) {
+		console.log("variable function ", cardData.value)
 		return resolve(cardData.value);
 	})
 };
@@ -283,7 +284,7 @@ cardTypes.firebaseGet = {
 		return new Promise(function(resolve, reject) {
 			var fb = new Firebase(inputs["url"] + inputs["path"]);
 			fb.once('value', function (snapshot){
-				return snapshot.val();
+				return resolve(snapshot.val());
 			}, function(err){
 				return resolve(null);
 			});
