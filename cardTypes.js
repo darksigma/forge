@@ -1,6 +1,6 @@
 var Promise = require("promise");
-var HTTP = require("http")
-
+var HTTP = require("http");
+var globalConfig = require("./globalConfig");
 
 var cardTypes = {};
 
@@ -34,6 +34,10 @@ cardTypes.number = {
 // 	cardClass: "httpResponse",
 // 	run: function(inputs, cardData, httpData, requestID) {
 // 		return new Promise(function(resolve, reject) {
+// 			var options = {
+// 			  host: 'www.random.org',
+// 			  path: '/integers/?num=1&min=1&max=10&col=1&base=10&format=plain&rnd=new'
+// 			};
 // 			return resolve(inputs.data);
 // 		});
 // 	},
