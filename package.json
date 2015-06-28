@@ -37,6 +37,7 @@
     "react-tools": "^0.13.3",
     "reactify": "^1.0.0",
     "reflux": "^0.2.3",
+    "request": "^2.58.0",
     "terminal-notifier": "^0.1.2",
     "uuid": "^2.0.1",
     "velocity-animate": "^1.2.2",

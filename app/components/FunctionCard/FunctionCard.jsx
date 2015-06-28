@@ -24,9 +24,9 @@ var FunctionCard = React.createClass({
 		var lambdaType = cardTypes[this.props.cardData.type];
 		return _.map(lambdaType.inputs, function(inputName) {
 			return (
-				<CardInput key={inputName} inputName={inputName} />
+				<CardInput key={inputName} inputName={inputName} inputValue={this.props.cardData.inputs[inputName]} />
 			);
-		})
+		}.bind(this));
 	},
 
 });
