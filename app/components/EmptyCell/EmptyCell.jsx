@@ -19,7 +19,7 @@ var EmptyCell = React.createClass({
 
 
 	componentWillUnmount: function() {
-		document.addEventListener("mousedown", this.handleDocumentMouseDown);
+		document.removeEventListener("mousedown", this.handleDocumentMouseDown);
 	},
 
 
