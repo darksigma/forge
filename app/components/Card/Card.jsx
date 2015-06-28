@@ -7,7 +7,7 @@ var cardTypes        = require("../../cardTypes.js");
 var FunctionCard     = require("../FunctionCard/FunctionCard.jsx")
 var VariableCard     = require("../VariableCard/VariableCard.jsx")
 var Draggable        = require("../../mixins/Draggable.jsx");
-var SignalIndicator  = require("../SignalIndicator/SignalIndicator.jsx")
+var CardOutput       = require("../CardOutput/CardOutput.jsx")
 var selectionActions = require("../../actions/selectionActions.js");
 var dragActions      = require("../../actions/dragActions.js");
 
@@ -34,24 +34,15 @@ var Card = React.createClass({
 			selected: this.props.selected,
 		});
 
-		var foundInputsToThis = _.any(this.props.graph.cards, function(cardData, cardId) {
-			if (cardData.inputs) {
-				return _.any(cardData.inputs, function(inputsTo, name){
-					return inputsTo === this.props.cardId;
-				}.bind(this));
-			}
-			else {
-				return false
-			}
-		}.bind(this));
-
 		return (
 			<div className={classes} style={rootStyle} onMouseDown={this.handleMouseDown}>
 				<div className="CardInner">
 					<div className="Header">
 						<div className="Icon"></div>
 						<div className="Name">{this.getCardName()}</div>
-						<SignalIndicator active={foundInputsToThis} />
+						<CardOutput
+							graph={this.props.graph}
+							cardId={this.props.cardId} />
 					</div>
 					<div className="CardUI">
 						{this.renderCardClass()}

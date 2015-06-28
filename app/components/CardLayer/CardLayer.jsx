@@ -35,9 +35,10 @@ var CardLayer = React.createClass({
 
 		var cardIdForCoordinate = gridHelpers.getCardIdForCoordinate(coordinate, this.props.graph.cards);
 
+		var dragData       = this.props.drag.get("dragData")
 		var isDraggingCard = false
-		if (cardIdForCoordinate) {
-			isDraggingCard = this.props.drag.get("cardId") === cardIdForCoordinate;
+		if (cardIdForCoordinate && dragData) {
+			isDraggingCard = dragData.get("type") === "card" && dragData.get("cardId") === cardIdForCoordinate;
 		}
 
 		if (cardIdForCoordinate && !isDraggingCard) {

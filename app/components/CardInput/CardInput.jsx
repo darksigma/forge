@@ -1,13 +1,17 @@
+var _               = require("lodash");
+var Immutable       = require("Immutable");
 var React           = require("react/addons");
 var classSet        = React.addons.classSet;
 var PureRenderMixin = React.addons.PureRenderMixin;
 var SignalIndicator = require("../SignalIndicator/SignalIndicator.jsx");
 var Droppable       = require("../../mixins/Droppable.jsx");
+var Draggable       = require("../../mixins/Draggable.jsx");
+var dragActions     = require("../../actions/dragActions.js");
 
 
 var CardInput = React.createClass({
 
-	mixins: [PureRenderMixin, Droppable],
+	mixins: [PureRenderMixin, Draggable, Droppable],
 
 
 	render: function() {
@@ -24,6 +28,29 @@ var CardInput = React.createClass({
 				</div>
 			</div>
 		);
+	},
+
+
+	/*
+		Events
+	*/
+
+	handleDragStart: function(e){
+		dragActions.startDrag(Immutable.Map({
+			type: "input",
+			cardId: this.props.cardId,
+			inputName: this.props.inputName,
+		}), e.startX, e.startY, e.currentX - e.startX, e.currentY - e.startY);
+	},
+
+
+	handleDragMove: function(e){
+		dragActions.continueDrag(e.currentX - e.startX, e.currentY - e.startY);
+	},
+
+
+	handleDragEnd: function(e){
+		dragActions.endDrag();
 	},
 
 });

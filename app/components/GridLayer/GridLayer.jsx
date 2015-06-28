@@ -42,9 +42,10 @@ var GridLayer = React.createClass({
 		var cardIdForCoordinate = gridHelpers.getCardIdForCoordinate(coordinate, this.props.graph.cards);
 
 		var draggedOverComponent = this.props.drag.get("draggedOverComponent");
-		var isDropping = false;
+		var dragData             = this.props.drag.get("dragData");
+		var isDropping           = false;
 
-		if (draggedOverComponent) {
+		if (draggedOverComponent && dragData.get("type") === "card") {
 			isDropping = draggedOverComponent.props.coordinate.x === coordinate.x &&
 				draggedOverComponent.props.coordinate.y === coordinate.y;
 		}

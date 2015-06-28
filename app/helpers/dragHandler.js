@@ -8,6 +8,11 @@ var DragHandler = function() {
 
 
 DragHandler.prototype.mouseDownComponent = function(e, ownerComponent) {
+	// Disallow parallel drags.
+	if (this.dragging) {
+		return;
+	}
+
 	e.preventDefault();
 	this.clearTextSelection();
 	this.ownerComponent = ownerComponent;
