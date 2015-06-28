@@ -33,8 +33,10 @@ var LinkLayer = React.createClass({
 
 	drawSignals: function(cards, grid, c) {
 		var signals = [];
-		for(key in cards) { // go through cards
-			var card = cards[key];
+		for(cardId in cards) { // go through cards
+			var card = cards[cardId];
+			console.log(card);
+			console.log(cardId);
 			if(typeof card.inputs != "undefined" && typeof cardTypes[card.type] != "undefined") {
 				var i = 1;
 				var inputs = cardTypes[card.type].inputs;
@@ -45,7 +47,7 @@ var LinkLayer = React.createClass({
 							<Link grid={grid}
 										cards={cards}
 										i={i}
-										key={key}
+										cardId={cardId}
 										startCard={startCard}
 										card={card}/>
 						);

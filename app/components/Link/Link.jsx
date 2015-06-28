@@ -16,15 +16,15 @@ var Link = React.createClass({
 	mixins: [PureRenderMixin],
 
 
-	render: function(i, key, startCard, card) {
+	render: function(i, cardId, startCard, card) {
 		var grid    = this.props.grid;
 		var cards   = this.props.cards;
 		var i = this.props.i;
-		var key = this.props.key;
+		var cardId = this.props.cardId;
 		var startCard = this.props.startCard;
 		var card = this.props.card;
 
-		var start = this.calculateStart(startCard, key, grid);
+		var start = this.calculateStart(startCard, cardId, grid);
 		var stop = this.calculateStop(card, i, grid);
 		var path = this.calculatePath(start, stop, card, startCard, grid);
 		return this.drawSignal(grid, path, c.signal);
@@ -42,7 +42,7 @@ var Link = React.createClass({
 		);
 	},
 
-	calculateStart: function(startCard, key, grid) {
+	calculateStart: function(startCard, cardId, grid) {
 		var cellSize = grid.get("cellWidth");
 		var transX = grid.get("transX");
 		var transY = grid.get("transY");
