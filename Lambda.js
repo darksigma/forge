@@ -80,4 +80,4 @@ exports.handler = function(event, context) {
 };
 
 
-// exports.handler({'Records':[{'Sns':{'Message':'{"graphId":"test-graph","nodeId":"http-get-1","requestId":"adfjalfjafj", "data":{}}'}}]}, null);
+// exports.handler({'Records':[{'Sns':{'Message':'{"graphId":"test-graph-nikhil","nodeId":"http-get-1","requestId":"6ac4c128-eb33-4577-b9b0-ce6700358974", "data":{}}'}}]}, null);
