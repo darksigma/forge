@@ -17,8 +17,8 @@ gridHelpers.getCellsInView = function(grid) {
 	var xStart = (cellWidth - transY) % cellWidth;
 	var yStart = (cellWidth - transX) % cellWidth;
 
-	var numX = Math.ceil((windowWidth + xStart) / cellWidth);
-	var numY = Math.ceil((windowHeight + yStart) / cellWidth);
+	var numX = Math.ceil((windowWidth + xStart) / cellWidth) + 1;
+	var numY = Math.ceil((windowHeight + yStart) / cellWidth) + 1;
 
 	var coordinates = [];
 

@@ -25,6 +25,11 @@ var GridStore = Reflux.createStore({
 	},
 
 
+	getData: function() {
+		return this.data_;
+	},
+
+
 	updateData: function(update) {
 		this.data_ = this.data_.merge(update);
 		this.trigger(this.data_);

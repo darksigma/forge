@@ -12,20 +12,35 @@ var GraphStore = Reflux.createStore({
 		this.graphId_      = window.location.pathname.substr(1);
 		this.graphRef_     = this.firebaseRoot_.child("graphs").child(this.graphId_);
 		this.lastSnapshot_ = null;
+		this.data_ = {
+			cards: {}
+		};
 
 		this.graphRef_.on("value", this.valueUpdated_.bind(this));
 	},
 
 
 	getInitialState: function(){
-		return {
-			cards: {}
-		};
+		return this.data_;
+	},
+
+
+	getData: function() {
+		return this.data_;
+	},
+
+
+	updateCardData: function(cardId, update) {
+		var cardRef = this.graphRef_.child("cards").child(cardId);
+		cardRef.transaction(function(oldValue) {
+			return _.assign({}, oldValue, update);
+		});
 	},
 
 
 	valueUpdated_: function(snapshot) {
-		this.trigger(snapshot.val());
+		this.data_ = snapshot.val();
+		this.trigger(this.data_);
 	}
 
 });
