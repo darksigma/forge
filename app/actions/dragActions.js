@@ -1,3 +1,4 @@
+var _           = require("lodash");
 var DragStore   = require("../stores/DragStore.js");
 var GridStore   = require("../stores/GridStore.js");
 var GraphStore  = require("../stores/GraphStore.js");
@@ -37,12 +38,12 @@ dragActions.continueDrag = function(cardId, offsetX, offsetY) {
 
 dragActions.endDrag = function(cardId) {
 	return new Promise(function(resolve, reject) {
-		var grid                = GridStore.getData();
-		var drag                = DragStore.getData();
-		var cellsInView         = gridHelpers.getCellsInView(grid);
+		var grid               = GridStore.getData();
+		var drag               = DragStore.getData();
+		var cellsInView        = gridHelpers.getCellsInView(grid);
 		var dragCellCoordinate = gridHelpers.closestCellToDrag(cellsInView, grid, drag);
 
-		if (dragCellCoordinate && drag.get("offsetX") && drag.get("offsetY")) {
+		if (dragCellCoordinate && !_.isNull(drag.get("offsetX")) && !_.isNull(drag.get("offsetY"))) {
 			var cardIdForCoordinate = gridHelpers.getCardIdForCoordinate(dragCellCoordinate, GraphStore.getData().cards);
 
 			if (!cardIdForCoordinate) {
