@@ -1,6 +1,6 @@
 var Promise = require("promise");
 var Request = require("request");
-var _ = require("lodash"); 
+var _ = require("lodash");
 var globalConfig = require("./globalConfig");
 
 var cardTypes = {};
@@ -30,7 +30,31 @@ cardTypes.number = {
 
 cardTypes.httpGet = {
 	humanReadableName: "GET",
-	cardClass: "function",
+	cardClass: "request",
+	run: function(inputs, cardData, httpData, requestID) {
+		return new Promise(function(resolve, reject) {
+			return resolve(httpData);
+		});
+	},
+	inputs: [],
+	hasOutput: true,
+};
+
+cardTypes.httpPost = {
+	humanReadableName: "POST",
+	cardClass: "request",
+	run: function(inputs, cardData, httpData, requestID) {
+		return new Promise(function(resolve, reject) {
+			return resolve(httpData);
+		});
+	},
+	inputs: [],
+	hasOutput: true,
+};
+
+cardTypes.httpPut = {
+	humanReadableName: "PUT",
+	cardClass: "request",
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
 			return resolve(httpData);
