@@ -31,12 +31,21 @@ var CardInput = React.createClass({
 		})
 		return (
 			<div className={classes}>
-				<SignalIndicator isDropping={signalActive} />
+				<SignalIndicator active={signalActive} />
 				<div className="Label">
 					{this.props.inputName}
 				</div>
 			</div>
 		);
+	},
+
+
+	getVirtualLink: function() {
+		return {
+			outputCardId: dragData.get("cardId"),
+			inputCardId: this.props.cardId,
+			inputName: this.props.inputName
+		};
 	},
 
 
