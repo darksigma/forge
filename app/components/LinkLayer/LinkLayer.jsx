@@ -46,7 +46,9 @@ var LinkLayer = React.createClass({
 						var startCard = cards[card.inputs[inputs[j]]];
 						var start = this.calculateStart(startCard, key, grid);
 						var stop = this.calculateStop(card, i, grid);
-						var path = this.calculatePath(start, stop, grid);
+						console.log(start);
+						console.log(stop);
+						var path = this.calculatePath(start, stop, card, startCard, grid);
 						signals.push(this.drawSignal(grid, path, c.signal));
 					}
 					i++;
@@ -74,10 +76,25 @@ var LinkLayer = React.createClass({
 		return [x, y];
 	},
 
-	calculatePath: function(start, stop, grid) {
+	calculatePath: function(start, stop, stopCard, startCard, grid) {
+		var cellSize = grid.get("cellWidth");
+		var transX = grid.get("transX");
+		var transY = grid.get("transY");
 		var preStart = [start[0]-12, start[1]];
 		var postStop = [stop[0]+12, stop[1]];
-		return [preStart, start, stop, postStop];
+		if(stop[0] == start[0]) {
+			return [preStart, start, stop, postStop];
+		}
+		var points = [preStart, start];
+		if(startCard.y > stopCard.y) {
+			points.push([start[0], startCard.y*cellSize - transY + cellSize]);
+		} else {
+			points.push([start[0], startCard.y*cellSize - transY]);
+		}
+
+		points.push(stop);
+		points.push(postStop);
+		return points;
 	},
 
 	// points = [[0,0],[0,1]]  <-- example
