@@ -29,6 +29,7 @@
     "nib": "^1.1.0",
     "node-uuid": "^1.4.2",
     "promise": "^7.0.3",
+    "promise-series": "^0.1.1",
     "react": "^0.13.3",
     "react-art": "^0.13.0",
     "react-router": "^0.13.3",
