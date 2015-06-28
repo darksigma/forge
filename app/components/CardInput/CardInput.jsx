@@ -40,6 +40,15 @@ var CardInput = React.createClass({
 	},
 
 
+	getVirtualLink: function() {
+		return {
+			outputCardId: dragData.get("cardId"),
+			inputCardId: this.props.cardId,
+			inputName: this.props.inputName
+		};
+	},
+
+
 	handleDrop: function(dragData) {
 		if (this.canHandleDrop(dragData)) {
 			dragActions.createLink(dragData.get("cardId"), this.props.cardId, this.props.inputName);
