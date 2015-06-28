@@ -6,11 +6,18 @@ var Droppable        = require("../../mixins/Droppable.jsx");
 var selectionActions = require("../../actions/selectionActions.js");
 var gridActions      = require("../../actions/gridActions.js");
 var dragActions      = require("../../actions/dragActions.js");
+var AddCardMenu      = require("../AddCardMenu/AddCardMenu.jsx")
 
 
 var EmptyCell = React.createClass({
 
 	mixins: [PureRenderMixin, Draggable, Droppable],
+
+	getInitialState: function() {
+		return {
+			showAddCardMenu: false
+		};
+	},
 
 
 	render: function() {
@@ -25,8 +32,18 @@ var EmptyCell = React.createClass({
 			active: this.props.active
 		});
 
+		if (this.state.showAddCardMenu) {
+			var addCardMenu = (
+				<AddCardMenu />
+			)
+		}
+
 		return (
-			<div className={classes} style={rootStyle} onMouseDown={this.handleMouseDown}>
+			<div className={classes}
+				style={rootStyle}
+				onMouseDown={this.handleMouseDown}
+				onDoubleClick={this.handleDoubleClick}>
+				{addCardMenu}
 			</div>
 		);
 	},
@@ -42,6 +59,14 @@ var EmptyCell = React.createClass({
 	/*
 		Events
 	*/
+
+	handleDoubleClick: function(e) {
+		e.preventDefault();
+		this.setState({
+			showAddCardMenu: true
+		});
+	},
+
 
 	handleMouseDown: function() {
 		selectionActions.clearSelection();

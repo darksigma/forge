@@ -34,11 +34,13 @@ var Card = React.createClass({
 			selected: this.props.selected,
 		});
 
+		var lambdaType = cardTypes[this.props.cardData.type];
+
 		return (
 			<div className={classes} style={rootStyle} onMouseDown={this.handleMouseDown}>
 				<div className="CardInner">
 					<div className="Header">
-						<div className="Icon"></div>
+						<img className="Icon" src={lambdaType.icon} />
 						<div className="Name">{this.getCardName()}</div>
 						<CardOutput
 							graph={this.props.graph}
