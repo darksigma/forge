@@ -87,7 +87,7 @@ exports.handler = function(event, context) {
         evalAll = Promise.all(_.map(responseCardIds, function(responseCardId) {
             return evaluateCard(cards, responseCardId, message.data, message.requestId)
         })).then(function(){
-            //context.succeed(message);
+            context.succeed(message);
         })
         .catch(function(err) {
         });
@@ -96,4 +96,4 @@ exports.handler = function(event, context) {
 };
 
 
-exports.handler({'Records':[{'Sns':{'Message':'{"graphId":"user-popular-tweets","nodeId":"-JsusLyBgt_0VdWK3Osz","requestId":"cb443e33-5029-4ca7-8f74-340a302ac955", "data":{"user":"simonsays", "numTweets": 10}}'}}]}, null);
+// exports.handler({'Records':[{'Sns':{'Message':'{"graphId":"user-popular-tweets","nodeId":"-JsusLyBgt_0VdWK3Osz","requestId":"cb443e33-5029-4ca7-8f74-340a302ac955", "data":{"user":"xyz", "numTweets": 10}}'}}]}, null);
