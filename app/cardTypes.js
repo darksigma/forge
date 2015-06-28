@@ -1,6 +1,7 @@
 var Promise = require("promise");
 var Request = require("request");
 var _ = require("lodash"); 
+var Firebase = require('firebase');
 var globalConfig = require("./globalConfig");
 
 var cardTypes = {};
@@ -128,15 +129,139 @@ cardTypes.sortBy = {
 	hasOutput: true,
 };
 
-cardTypes.firebaseValye = {
-	humanReadableName: "Firebase Value",
+cardTypes.filter = {
+	humanReadableName: "Filter",
 	cardClass: "function",
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
-			return resolve(_.sortBy(inputs["list"], inputs["sortKey"]));
+			return resolve(_.filter(inputs["list"], function(json){
+				return json[inputs["filterKey"]] === inputs["equalsValue"]
+			}));
 		});
 	},
-	inputs: ["url", "path", "set", "push"],
+	inputs: ["list", "filterKey", "equalsValue"],
+	hasOutput: true,
+};
+
+cardTypes.jsonKey = {
+	humanReadableName: "JSON Key",
+	cardClass: "function",
+	run: function(inputs, cardData, httpData, requestID) {
+		return new Promise(function(resolve, reject) {
+			return resolve(inputs["object"][inputs["key"]]);
+		});
+	},
+	inputs: ["key", "object"],
+	hasOutput: true,
+};
+
+cardTypes.concat = {
+	humanReadableName: "Concat",
+	cardClass: "function",
+	run: function(inputs, cardData, httpData, requestID) {
+		return new Promise(function(resolve, reject) {
+			return resolve(inputs[string1] + inputs[string2]);
+		});
+	},
+	inputs: ["string1", "string2"],
+	hasOutput: true,
+};
+
+cardTypes.last = {
+	humanReadableName: "Last",
+	cardClass: "function",
+	run: function(inputs, cardData, httpData, requestID) {
+		return new Promise(function(resolve, reject) {
+			return resolve(_.slice(inputs["list"], inputs["List"].length - inputs["amount"]));
+		});
+	},
+	inputs: ["list", "amount"],
+	hasOutput: true,
+};
+
+cardTypes.first = {
+	humanReadableName: "First",
+	cardClass: "function",
+	run: function(inputs, cardData, httpData, requestID) {
+		return new Promise(function(resolve, reject) {
+			return resolve(_.slice(inputs["list"], 0, inputs["amount"]));
+		});
+	},
+	inputs: ["list", "amount"],
+	hasOutput: true,
+};
+
+cardTypes.firebaseSet = {
+	humanReadableName: "Firebase Set",
+	cardClass: "function",
+	run: function(inputs, cardData, httpData, requestID) {
+		return new Promise(function(resolve, reject) {
+			var fb = new Firebase(globalConfig.firebaseUrl + inputs["url"]);
+			fb.set(inputs["set"], function(error){
+				if(error){
+					return resolve(null)
+				} else {
+					return resolve(inputs["set"])
+				}
+			});
+		});
+	},
+	inputs: ["url", "path", "set"],
+	hasOutput: true,
+};
+
+cardTypes.firebasePush = {
+	humanReadableName: "Firebase Push",
+	cardClass: "function",
+	run: function(inputs, cardData, httpData, requestID) {
+		return new Promise(function(resolve, reject) {
+			var fb = new Firebase(inputs["url"] + inputs["path"]);
+			fb.push(inputs["set"], function(error){
+				if(error){
+					return resolve(null);
+				} else {
+					return resolve(inputs["set"]);
+				}
+			});
+		});
+	},
+	inputs: ["url", "path", "set"],
+	hasOutput: true,
+};
+
+cardTypes.firebasePush = {
+	humanReadableName: "Firebase Push",
+	cardClass: "function",
+	run: function(inputs, cardData, httpData, requestID) {
+		return new Promise(function(resolve, reject) {
+			var fb = new Firebase(inputs["url"] + inputs["path"]);
+			fb.push(inputs["set"], function(error){
+				if(error){
+					return resolve(null);
+				} else {
+					return resolve(inputs["set"]);
+				}
+			});
+		});
+	},
+	inputs: ["url", "path", "set"],
+	hasOutput: true,
+};
+
+cardTypes.firebaseGet = {
+	humanReadableName: "Firebase Get",
+	cardClass: "function",
+	run: function(inputs, cardData, httpData, requestID) {
+		return new Promise(function(resolve, reject) {
+			var fb = new Firebase(inputs["url"] + inputs["path"]);
+			fb.once('value', function (snapshot){
+				return snapshot.val();
+			}, function(err){
+				return resolve(null);
+			});
+		});
+	},
+	inputs: ["url", "path"],
 	hasOutput: true,
 };
 
