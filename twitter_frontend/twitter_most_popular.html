@@ -1,0 +1,118 @@
+<head>
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Twitter</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+
+
+
+  <div class="container">
+    <nav class="navbar">
+        <center>
+        <ul class="navbar-item">
+          <a class="navbar-link" href="twitter_front.html">Home</a>
+          <a class="navbar-link" href="twitter_feed.html">Feed</a>
+          <a class="navbar-link" href="twitter_most_popular.html">Popular</a>
+        </ul>
+        </center>
+
+    </nav>
+  </div>
+
+
+</head>
+
+
+<body>
+
+<div class="container">
+<center><h1>Most Popular Tweets</h1></center>
+</div>
+
+
+
+
+
+<div class='container'>
+	<div class="row">
+		<div class="one-third column">
+		  <h3>@personX</h3>
+		  <h5> this is my tweet. </h5>
+		</div>
+		<div class="one-third column">
+    		<input class="button-primary" type="submit" value="★ Favorite">
+		</div>
+	</div>
+</div>
+
+
+<div class='container'>
+	<div class="row">
+		<div class="one-third column">
+		  <h3>@personY</h3>
+		  <h5> this is my tweet. </h5>
+		</div>
+		<div class="one-third column">
+		<form name="favorite" action="http://api.f0rge.io/trigger/add-tweet/-JsuQwcD2AZUD6pDI2kA" method="post">
+			<input type="hidden" name="numFavorites" value="1">
+      <input ty
+		  	
+
+		</div>
+
+	</form>
+	</div>
+</div>
+
+
+<div class='container'>
+	<div class="row">
+		<div class="one-third column">
+		  <h3>@personZ</h3>
+		  <h5> this is my tweet. </h5>
+		</div>
+		<div class="two-thirds column">
+			<form>
+		  		<button href=""><img src='https://upload.wikimedia.org/wikipedia/en/e/e7/Tiny_Star.gif' />Favorite</button>​​​​​​​​​​​​​
+
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+    var frm = $('#submitTweet');
+    frm.submit(function (ev) {
+        $.ajax({
+            contentType: "application/json",
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+                alert('ok');
+            }
+        });
+        ev.preventDefault();
+    });
+	</script>
+</body>
+</html>
+

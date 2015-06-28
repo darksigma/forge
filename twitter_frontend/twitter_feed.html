@@ -1,0 +1,83 @@
+<head>
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Twitter</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <div class="container">
+    <nav class="navbar">
+        <center>
+        <ul class="navbar-item">
+          <a class="navbar-link" href="twitter_front.html">Home</a>
+          <a class="navbar-link" href="twitter_feed.html">Feed</a>
+          <a class="navbar-link" href="twitter_most_popular.html">Popular</a>
+        </ul>
+        </center>
+
+    </nav>
+  </div>
+
+</head>
+
+
+<body>
+
+<div class="container">
+<center><h1>Twitter Feed</h1></center>
+</div>
+
+
+
+<script>
+window.setInterval(function(){
+  /// call your function here
+      $(document).ready(function () {
+        console.log("warming up...");
+        $.getJSON("http://api.f0rge.io/trigger/get-popular/-JsuTol-k21_7GrLRNN-", function (data) {
+            console.log("got JSON");
+            $('.row').empty();
+
+
+
+            $.each(data, function (key, obj) {
+                console.log(key, obj)
+
+                $('<div />', {
+                    id: key,
+                    text: obj
+                }).appendTo('.row')
+
+            });
+        });
+    });
+
+}, 2000);
+
+</script>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="tw"></div>
+      <div class="ten columns"></div>
+    </div>
+  </div>
+</body>
+</html>

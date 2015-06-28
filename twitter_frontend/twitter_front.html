@@ -1,0 +1,99 @@
+<head>
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Twitter</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+
+  <div class="container">
+    <nav class="navbar">
+        <center>
+        <ul class="navbar-item">
+          <a class="navbar-link" href="twitter_front.html">Home</a>
+          <a class="navbar-link" href="twitter_feed.html">Feed</a>
+          <a class="navbar-link" href="twitter_most_popular.html">Popular</a>
+        </ul>
+        </center>
+
+    </nav>
+  </div>
+
+</head>
+
+
+<body>
+
+<div class="container">
+<center><h1>Twitter</h1></center>
+</div>
+
+<div class="container">
+<h3>Name</h3>
+<form id="submitTweet", action="http://api.f0rge.io/trigger/add-tweet/-JsuQwcD2AZUD6pDI2kA" method="post">
+
+    <input class="u-full-width" type="text" placeholder="@BarackObama" name="user">
+
+    <h3>Your Tweet</h3>
+
+    <textarea class="u-full-width" placeholder="Happy Birthday" name="tweet"></textarea>
+
+    <input type="hidden" name="numFavorites" value="0">
+
+    <input class="button-primary" type="submit" value="Tweet this!">
+
+</form>
+
+<center><img src="http://www.aedweb.org/web/images/twitter-big.png"></img></center>
+
+</div>
+
+</html>
+
+
+<script type="text/javascript">
+    var frm = $('#submitTweet');
+    frm.submit(function (ev) {
+        ev.preventDefault();
+
+        var arr = frm.serializeArray();
+        var data = {
+          user: arr[0].value,
+          tweet: arr[1].value,
+          numFavorites: arr[2].value
+        };
+
+        $.ajax({
+
+            contentType: "application/json",
+
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: JSON.stringify(data),
+
+
+            success: function (data) {
+                console.log("data: ", data);
+            }
+        });
+
+    });
+</script>
+
+
