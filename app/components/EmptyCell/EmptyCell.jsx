@@ -3,6 +3,7 @@ var classSet         = React.addons.classSet;
 var PureRenderMixin  = React.addons.PureRenderMixin;
 var Draggable        = require("../../mixins/Draggable.jsx");
 var selectionActions = require("../../actions/selectionActions.js");
+var gridActions = require("../../actions/gridActions.js");
 
 
 var EmptyCell = React.createClass({
@@ -38,21 +39,17 @@ var EmptyCell = React.createClass({
 
 
 	handleDragStart: function(e){
-		// var thisRect = this.getDOMNode().getBoundingClientRect();
-		// var startX = thisRect.left;
-		// var startY = thisRect.top;
-		// dragActions.startDrag(this.props.cardId, startX, startY, e.currentX - e.startX, e.currentY - e.startY);
+		this.startTransX = this.props.grid.get("transX");
+		this.startTransY = this.props.grid.get("transY");
 	},
 
 
 	handleDragMove: function(e){
-		// dragActions.continueDrag(this.props.cardId, e.currentX - e.startX, e.currentY - e.startY);
+		var offsetX = e.startX - e.currentX;
+		var offsetY = e.startY - e.currentY;
+		gridActions.setTranslate(this.startTransX + offsetX, this.startTransY + offsetY);
 	},
 
-
-	handleDragEnd: function(e){
-		// dragActions.endDrag(this.props.cardId);
-	},
 
 });
 
