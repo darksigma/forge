@@ -1,6 +1,6 @@
 var Promise = require("promise");
-var Request = require("request"); 
-var _ = require("lodash"); 
+var Request = require("request");
+var _ = require("lodash");
 var Firebase = require('firebase');
 var globalConfig = require("./globalConfig");
 
@@ -237,6 +237,7 @@ cardTypes.first = {
 cardTypes.firebaseSet = {
 	humanReadableName: "Firebase Set",
 	cardClass: "function",
+	icon: "/assets/firebase.png",
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
 			var fb = new Firebase(globalConfig.firebaseUrl + inputs["url"]);
@@ -256,29 +257,12 @@ cardTypes.firebaseSet = {
 cardTypes.firebasePush = {
 	humanReadableName: "Firebase Push",
 	cardClass: "function",
+	icon: "/assets/firebase.png",
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
 			var fb = new Firebase(inputs["url"] + inputs["path"]);
-			fb.push(inputs["set"], function(error){
-				if(error){
-					return resolve(null);
-				} else {
-					return resolve(inputs["set"]);
-				}
-			});
-		});
-	},
-	inputs: ["url", "path", "set"],
-	hasOutput: true,
-};
-
-cardTypes.firebasePush = {
-	humanReadableName: "Firebase Push",
-	cardClass: "function",
-	run: function(inputs, cardData, httpData, requestID) {
-		return new Promise(function(resolve, reject) {
-			var fb = new Firebase(inputs["url"] + inputs["path"]);
-			fb.push(inputs["set"], function(error){
+			var pushRef = fb.push();
+			pushRef.set(inputs["set"], function(error){
 				if(error){
 					return resolve(null);
 				} else {
@@ -294,6 +278,7 @@ cardTypes.firebasePush = {
 cardTypes.firebaseGet = {
 	humanReadableName: "Firebase Get",
 	cardClass: "function",
+	icon: "/assets/firebase.png",
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
 			var fb = new Firebase(inputs["url"] + inputs["path"]);
