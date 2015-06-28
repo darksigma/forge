@@ -7,7 +7,8 @@ var SelectionStore = Reflux.createStore({
 
 	init: function(){
 		this.data_ = Immutable.fromJS({
-			selectedCard: null
+			selectedData: Immutable.Map({
+			})
 		});
 	},
 
@@ -17,8 +18,8 @@ var SelectionStore = Reflux.createStore({
 	},
 
 
-	setSelectedCard: function(cardId) {
-		this.data_ = this.data_.set("selectedCard", cardId);
+	setSelectedData: function(selectedData) {
+		this.data_ = this.data_.set("selectedData", selectedData);
 		this.trigger(this.data_);
 	},
 
