@@ -5,7 +5,10 @@
 	cursor: pointer
 
 	&:hover
-		background-color: $activeCell
+		color: $link-color
+
+		> .SignalIndicator
+			background-color: lighten($link-color, 50%)
 
 	> .SignalIndicator
 		flex-grow: 0
