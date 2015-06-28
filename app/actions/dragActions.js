@@ -42,7 +42,7 @@ dragActions.endDrag = function(cardId) {
 		var cellsInView         = gridHelpers.getCellsInView(grid);
 		var dragCellCoordinate = gridHelpers.closestCellToDrag(cellsInView, grid, drag);
 
-		if (dragCellCoordinate) {
+		if (dragCellCoordinate && drag.get("offsetX") && drag.get("offsetY")) {
 			var cardIdForCoordinate = gridHelpers.getCardIdForCoordinate(dragCellCoordinate, GraphStore.getData().cards);
 
 			if (!cardIdForCoordinate) {
