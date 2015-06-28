@@ -1,10 +1,12 @@
 .Card
 	position: absolute
 	padding: 12px
+	pointer-events: none
 
 	&.selected
 		> .CardInner
 			border: 2px solid blue(0.5)
+			pointer-events: auto
 
 	> .CardInner
 		width: 100%
