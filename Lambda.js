@@ -65,13 +65,12 @@ exports.handler = function(event, context) {
     var root = new Firebase(globalConfig.firebaseUrl);
     root.child("graphs").child(graph_id).once('value', function(snap) {
         var graphData = snap.val();
-
         var cards = graphData.cards;
+        var responseCardIds = cards[message.nodeId].responseCardIds;
 
-        console.log("responseCardId ", cards[message.nodeId].responseCardId, " cards ", cards);
-
-        evaluateCard(cards, cards[message.nodeId].responseCardId, message.data, message.requestId)
-        .then(function(){
+        evalAll = Promise.all(_.map(responseCardIds, function(responseCardId) {
+            return evaluateCard(cards, responseCardId, message.data, message.requestId)
+        })).then(function(){
             context.succeed(message);
         })
         .catch(function(err) {

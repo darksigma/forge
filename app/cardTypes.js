@@ -5,6 +5,9 @@ var globalConfig = require("./globalConfig");
 
 var cardTypes = {};
 
+isNull = function(x){
+	return typeof x !== "undefined" && x !== null;
+}
 
 cardTypes.number = {
 	humanReadableName: "Number",
@@ -37,23 +40,27 @@ cardTypes.httpResponse = {
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
 			console.log("answer ", inputs.data)
-			Request.post({
-				url: globalConfig.httpServerUrl + 'complete/' + requestID,
-				json: true,
-				body: {
-					answer: inputs.data
-				}
-			}, function(error, response, body) {
-				console.log("REQUEST");
-				console.log("error: ", error);
-				console.log("body: ", body);
-				if(error) {
-					reject(error);
-				}
-				else {
-					resolve();
-				}
-			})
+			if (!isNull(inputs.data)){
+				Request.post({
+					url: globalConfig.httpServerUrl + 'complete/' + requestID,
+					json: true,
+					body: {
+						answer: inputs.data
+					}
+				}, function(error, response, body) {
+					console.log("REQUEST");
+					console.log("error: ", error);
+					console.log("body: ", body);
+					if(error) {
+						reject(error);
+					}
+					else {
+						resolve();
+					}
+				})
+			} else {
+				resolve();
+			}
 		})
 	},
 	inputs: ["data"],
@@ -110,7 +117,7 @@ cardTypes.multiply = {
 };
 
 cardTypes.sortBy = {
-	humanReadableName: "SortBy",
+	humanReadableName: "Sort By",
 	cardClass: "function",
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
@@ -118,6 +125,18 @@ cardTypes.sortBy = {
 		});
 	},
 	inputs: ["list", "sortKey"],
+	hasOutput: true,
+};
+
+cardTypes.firebaseValye = {
+	humanReadableName: "Firebase Value",
+	cardClass: "function",
+	run: function(inputs, cardData, httpData, requestID) {
+		return new Promise(function(resolve, reject) {
+			return resolve(_.sortBy(inputs["list"], inputs["sortKey"]));
+		});
+	},
+	inputs: ["url", "path", "set", "push"],
 	hasOutput: true,
 };
 
