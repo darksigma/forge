@@ -1,6 +1,9 @@
-var DragStore = require("../stores/DragStore.js");
-var Promise   = require("promise");
-var Immutable = require("Immutable");
+var DragStore   = require("../stores/DragStore.js");
+var GridStore   = require("../stores/GridStore.js");
+var GraphStore  = require("../stores/GraphStore.js");
+var Promise     = require("promise");
+var Immutable   = require("Immutable");
+var gridHelpers = require("../helpers/gridHelpers.js");
 
 
 var dragActions = {}
@@ -34,6 +37,19 @@ dragActions.continueDrag = function(cardId, offsetX, offsetY) {
 
 dragActions.endDrag = function(cardId) {
 	return new Promise(function(resolve, reject) {
+		var grid                = GridStore.getData();
+		var drag                = DragStore.getData();
+		var cellsInView         = gridHelpers.getCellsInView(grid);
+		var dragCellCoordinate = gridHelpers.closestCellToDrag(cellsInView, grid, drag);
+
+		if (dragCellCoordinate) {
+			var cardIdForCoordinate = gridHelpers.getCardIdForCoordinate(dragCellCoordinate, GraphStore.getData().cards);
+
+			if (!cardIdForCoordinate) {
+				GraphStore.updateCardData(cardId, dragCellCoordinate);
+			}
+		}
+
 		DragStore.updateData(Immutable.Map({
 			cardId: null,
 			startX: null,
