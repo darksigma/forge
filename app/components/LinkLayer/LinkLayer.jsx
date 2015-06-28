@@ -46,8 +46,6 @@ var LinkLayer = React.createClass({
 						var startCard = cards[card.inputs[inputs[j]]];
 						var start = this.calculateStart(startCard, key, grid);
 						var stop = this.calculateStop(card, i, grid);
-						console.log(start);
-						console.log(stop);
 						var path = this.calculatePath(start, stop, card, startCard, grid);
 						signals.push(this.drawSignal(grid, path, c.signal));
 					}
@@ -86,19 +84,26 @@ var LinkLayer = React.createClass({
 			return [preStart, start, stop, postStop];
 		}
 		var points = [preStart, start];
-		console.log(startCard.y);
-		console.log(stopCard.y);
 		if(startCard.y < stopCard.y) {
 			points.push([start[0], startCard.y*cellSize - transY + cellSize]);
 		} else {
 			points.push([start[0], startCard.y*cellSize - transY]);
 		}
 
-		// TODO recursion
+		var mostRecentPoint = points[points.length-1];
+		while(mostRecentPoint[0] != stop[0]) {
+			if(mostRecentPoint[0] < stop[0]) {
+				//go right
+				points.push([mostRecentPoint[0] + cellSize, mostRecentPoint[1]]);
+			} else {
+				// go left
+				points.push([mostRecentPoint[0] - cellSize, mostRecentPoint[1]]);
+			}
+			mostRecentPoint = points[points.length-1];
+		}
 
 		points.push(stop);
 		points.push(postStop);
-		console.log(points);
 		return points;
 	},
 
