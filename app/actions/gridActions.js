@@ -1,6 +1,6 @@
 var GridStore = require("../stores/GridStore.js");
 var Promise   = require("promise");
-var Immutable = require("Immutable");
+var Immutable = require("immutable");
 
 
 var gridActions = {}

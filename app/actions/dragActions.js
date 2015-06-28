@@ -3,7 +3,7 @@ var DragStore   = require("../stores/DragStore.js");
 var GridStore   = require("../stores/GridStore.js");
 var GraphStore  = require("../stores/GraphStore.js");
 var Promise     = require("promise");
-var Immutable   = require("Immutable");
+var Immutable   = require("immutable");
 var gridHelpers = require("../helpers/gridHelpers.js");
 var dropHandler = require("../helpers/dropHandler.js");
 
