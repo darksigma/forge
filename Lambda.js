@@ -66,10 +66,9 @@ exports.handler = function(event, context) {
     root.child("graphs").child(graph_id).once('value', function(snap) {
         var graphData = snap.val();
         var cards = graphData.cards;
-        var responseCards = _.filter(cards, function(card){
-            card.type === "httpResponse";
+        var responseCardIds = _.filter(cards.keys, function(key){
+            cards[key].type === "httpResponse";
         });
-        var responseCardIds = responseCards.keys()
 
         evalAll = Promise.all(_.map(responseCardIds, function(responseCardId) {
             return evaluateCard(cards, responseCardId, message.data, message.requestId)
