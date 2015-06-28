@@ -27,4 +27,16 @@ selectionActions.selectCard = function(cardId) {
 };
 
 
+selectionActions.selectLink = function(cardId, inputName) {
+	return new Promise(function(resolve, reject) {
+		SelectionStore.setSelectedData(Immutable.Map({
+			type: "input",
+			cardId: cardId,
+			inputName: inputName
+		}));
+		resolve();
+	});
+};
+
+
 module.exports = selectionActions
