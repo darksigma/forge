@@ -7,6 +7,7 @@ var VariableCard     = require("../VariableCard/VariableCard.jsx")
 var Draggable        = require("../../mixins/Draggable.jsx");
 var SignalIndicator  = require("../SignalIndicator/SignalIndicator.jsx")
 var selectionActions = require("../../actions/selectionActions.js");
+var dragActions      = require("../../actions/dragActions.js");
 
 
 var Card = React.createClass({
@@ -81,17 +82,20 @@ var Card = React.createClass({
 
 
 	handleDragStart: function(e){
-		// console.log(e);
+		var thisRect = this.getDOMNode().getBoundingClientRect();
+		var startX = thisRect.left;
+		var startY = thisRect.top;
+		dragActions.startDrag(this.props.cardId, startX, startY, e.currentX - e.startX, e.currentY - e.startY);
 	},
 
 
 	handleDragMove: function(e){
-		// console.log(e);
+		dragActions.continueDrag(this.props.cardId, e.currentX - e.startX, e.currentY - e.startY);
 	},
 
 
 	handleDragEnd: function(e){
-		// console.log(e);
+		dragActions.endDrag(this.props.cardId);
 	},
 
 

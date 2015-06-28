@@ -19,7 +19,7 @@ var GraphStore = Reflux.createStore({
 
 	getInitialState: function(){
 		return {
-			nodes: {}
+			cards: {}
 		};
 	},
 
