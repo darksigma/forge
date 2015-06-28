@@ -3,11 +3,10 @@ var Reflux    = require("reflux");
 var Immutable = require("Immutable");
 
 
-var GridStore = Reflux.createStore({
+var DragStore = Reflux.createStore({
 
 	init: function(){
-		this.data_ = Immutable.Map({
-		});
+		this.data_ = Immutable.Map({});
 	},
 
 
@@ -15,7 +14,13 @@ var GridStore = Reflux.createStore({
 		return this.data_;
 	},
 
+
+	updateData: function(update) {
+		this.data_ = this.data_.merge(update);
+		this.trigger(this.data_);
+	},
+
 });
 
 
-module.exports = GridStore;
+module.exports = DragStore;

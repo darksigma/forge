@@ -24,11 +24,10 @@ var CardLayer = React.createClass({
 
 
 	renderCard: function(cardData, cardId) {
-		var cellWidth = this.props.grid.get("cellWidth");
-		var x = (cardData.x * cellWidth) - this.props.grid.get("transX");
-		var y = (cardData.y * cellWidth) - this.props.grid.get("transY");
-
-		isSelected = this.props.selection.get("selectedCard") === cardId;
+		var cellWidth  = this.props.grid.get("cellWidth");
+		var x          = (cardData.x * cellWidth) - this.props.grid.get("transX");
+		var y          = (cardData.y * cellWidth) - this.props.grid.get("transY");
+		var isSelected = this.props.selection.get("selectedCard") === cardId;
 
 		return (
 			<Card key={cardId} cardId={cardId} cardData={cardData} x={x} y={y} width={cellWidth} selected={isSelected}/>

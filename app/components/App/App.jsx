@@ -5,9 +5,12 @@ var PureRenderMixin = React.addons.PureRenderMixin;
 var GridLayer       = require("../GridLayer/GridLayer.jsx")
 var LinkLayer       = require("../LinkLayer/LinkLayer.jsx")
 var CardLayer       = require("../CardLayer/CardLayer.jsx")
+var DragLayer       = require("../DragLayer/DragLayer.jsx")
+
 var GraphStore      = require("../../stores/GraphStore.js");
 var GridStore       = require("../../stores/GridStore.js");
 var SelectionStore  = require("../../stores/SelectionStore.js");
+var DragStore       = require("../../stores/DragStore.js");
 
 
 var App = React.createClass({
@@ -17,6 +20,7 @@ var App = React.createClass({
 		Reflux.connect(GraphStore, "graph"),
 		Reflux.connect(GridStore, "grid"),
 		Reflux.connect(SelectionStore, "selection"),
+		Reflux.connect(DragStore, "drag"),
 	],
 
 	render: function() {
@@ -25,6 +29,7 @@ var App = React.createClass({
 				<GridLayer graph={this.state.graph} grid={this.state.grid} />
 				<LinkLayer graph={this.state.graph} grid={this.state.grid} />
 				<CardLayer graph={this.state.graph} grid={this.state.grid} selection={this.state.selection} />
+				<DragLayer graph={this.state.graph} grid={this.state.grid} drag={this.state.drag} />
 				<img className="Logo" src="/assets/forge.svg"></img>
 			</div>
 		);
