@@ -21,10 +21,12 @@ print 'CREATING ARCHIVE'
 zf = zipfile.ZipFile('Lambda.zip', mode='w')
 
 try:
-    files = [f for f in os.listdir('.') if not f.endswith(".zip")]
-    for f in files:
-        print('ADDING: ' + f)
-        zf.write(f)
+    path = "./"
+    for root, dirs, files in os.walk(path):
+        for f in files:
+            if not f.endswith(".zip"):
+                print 'ADDING' + os.path.join(root, f)
+                zf.write(os.path.join(root, f))
 finally:
     print 'CLOSING ARCHIVE'
     zf.close()
@@ -32,9 +34,9 @@ finally:
 print
 print_info('Lambda.zip')
 
-c = boto.connect_s3()
-b = c.create_bucket('forge-06199412')
-k = Key(b)
-k.key = 'lambda_zip'
-k.set_contents_from_filename('Lambda.zip')
+# c = boto.connect_s3()
+# b = c.create_bucket('forge-06199412')
+# k = Key(b)
+# k.key = 'lambda_zip'
+# k.set_contents_from_filename('Lambda.zip')
 
