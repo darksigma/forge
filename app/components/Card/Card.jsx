@@ -4,11 +4,13 @@ var PureRenderMixin = React.addons.PureRenderMixin;
 var cardTypes       = require("../../../cardTypes.js");
 var FunctionCard    = require("../FunctionCard/FunctionCard.jsx")
 var VariableCard    = require("../VariableCard/VariableCard.jsx")
+var Draggable       = require("../../mixins/Draggable.jsx");
+var SignalIndicator = require("../SignalIndicator/SignalIndicator.jsx")
 
 
 var Card = React.createClass({
 
-	mixins: [PureRenderMixin],
+	mixins: [PureRenderMixin, Draggable],
 
 	cardClassRendererMap: {
 		"function": FunctionCard,
@@ -29,6 +31,7 @@ var Card = React.createClass({
 					<div className="Header">
 						<div className="Icon"></div>
 						<div className="Name">{this.getCardName()}</div>
+						<SignalIndicator active={true} />
 					</div>
 					<div className="CardUI">
 						{this.renderCardClass()}
@@ -60,6 +63,26 @@ var Card = React.createClass({
 			)
 		}
 	},
+
+	/*
+		Events
+	*/
+
+
+	handleDragStart: function(e){
+		// console.log(e);
+	},
+
+
+	handleDragMove: function(e){
+		// console.log(e);
+	},
+
+
+	handleDragEnd: function(e){
+		// console.log(e);
+	},
+
 
 });
 

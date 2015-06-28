@@ -16,7 +16,6 @@ var FunctionCard = React.createClass({
 		return (
 			<div className="FunctionCard">
 				<div className="Inputs">{this.renderInputs()}</div>
-				<div className="Output">{this.renderOutput()}</div>
 			</div>
 		);
 	},
@@ -28,16 +27,6 @@ var FunctionCard = React.createClass({
 				<CardInput key={inputName} inputName={inputName} />
 			);
 		})
-	},
-
-	renderOutput: function() {
-		var lambdaType = cardTypes[this.props.cardData.type];
-
-		if (lambdaType.hasOutput) {
-			return (
-				<CardOutput />
-			);
-		}
 	},
 
 });
