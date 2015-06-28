@@ -3,6 +3,7 @@ var classSet         = React.addons.classSet;
 
 var PureRenderMixin  = React.addons.PureRenderMixin;
 
+var _                = require("lodash");
 var c                = require("../../helpers/color.js");
 
 var cardTypes        = require("../../cardTypes");
@@ -57,6 +58,35 @@ var LinkLayer = React.createClass({
 				}
 			}
 		}
+
+		var draggedOverComponent = this.props.drag.get("draggedOverComponent");
+		if(draggedOverComponent && _.isFunction(draggedOverComponent.getVirtualLink)) {
+			var info = draggedOverComponent.getVirtualLink();
+			if(typeof info.inputName == "string" && info.outputCardId != info.inputCardId) {
+				var startCard = this.props.graph.cards[info.outputCardId];
+				var card = this.props.graph.cards[info.inputCardId];
+				var i = 0;
+				var k = 0;
+				var inputs = cardTypes[card.type].inputs;
+				for(j in inputs) {
+					k++
+					if(inputs[j] == info.inputName){
+						i = k;
+					}
+				}
+				signals.push(
+					<Link grid={grid}
+								i={i}
+								selection={this.props.selection}
+								hover={this.props.hover}
+								inputName={info.inputName}
+								cardId={info.outputCardId}
+								startCard={startCard}
+								card={card}/>
+				);
+			}
+		}
+
 		return signals;
 	},
 
