@@ -86,14 +86,19 @@ var LinkLayer = React.createClass({
 			return [preStart, start, stop, postStop];
 		}
 		var points = [preStart, start];
-		if(startCard.y > stopCard.y) {
+		console.log(startCard.y);
+		console.log(stopCard.y);
+		if(startCard.y < stopCard.y) {
 			points.push([start[0], startCard.y*cellSize - transY + cellSize]);
 		} else {
 			points.push([start[0], startCard.y*cellSize - transY]);
 		}
 
+		// TODO recursion
+
 		points.push(stop);
 		points.push(postStop);
+		console.log(points);
 		return points;
 	},
 
