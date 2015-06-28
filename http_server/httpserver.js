@@ -58,7 +58,7 @@ app.put('/trigger/:graph_id/:node_id', function (req, res) {
     processLambda(req, res, req.params.graph_id, req.params.node_id, false);
 });
 
-var server = app.listen(3000, function () {
+var server = app.listen(80, function () {
 
   var host = server.address().address;
   var port = server.address().port;
