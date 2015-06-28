@@ -89,7 +89,7 @@ cardTypes.httpResponse = {
 						answer: inputs.data
 					}
 				}, function(error, response, body) {
-					console.log("REQUEST");
+					console.log("REQUEST: ", globalConfig.httpServerUrl + 'complete/' + requestID);
 					console.log("error: ", error);
 					console.log("body: ", body);
 					if(error) {

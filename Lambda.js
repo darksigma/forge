@@ -40,7 +40,7 @@ evaluateCard = function(cards, cardId, httpData, requestId) {
                 inputs[typeInfo.inputs[i]] = value;
             });
 
-            console.log("running with ", inputCardId, " and data ", cards[inputCardId])
+            console.log("running lambda with ", inputs, " and data ", cards[cardId])
             typeInfo.run(inputs, cards[cardId], httpData, requestId)
             .then(function(output) {
                 return resolve(output);
@@ -87,4 +87,4 @@ exports.handler = function(event, context) {
 };
 
 
-// exports.handler({'Records':[{'Sns':{'Message':'{"graphId":"test-graph-nikhil","nodeId":"http-get-1","requestId":"f1c49d21-74f3-4081-a709-7a5e9a518e36", "data":{}}'}}]}, null);
+// exports.handler({'Records':[{'Sns':{'Message':'{"graphId":"get-popular","nodeId":"-JsuTol-k21_7GrLRNN-","requestId":"173b3bad-8bd2-406d-9902-58ec69b10102", "data":{}}'}}]}, null);
