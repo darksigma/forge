@@ -36,6 +36,7 @@ var Card = React.createClass({
 			Card: true,
 			selected: this.props.selected,
 			hovered: this.props.hovered,
+			dragging: this.props.isDragging,
 		});
 
 		var lambdaType = cardTypes[this.props.cardData.type];
