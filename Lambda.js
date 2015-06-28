@@ -23,8 +23,9 @@ exports.handler = function(event, context) {
     var root = new Firebase(globalConfig.firebaseUrl);
     root.child("graphs").child(graph_id).once('value', function(snap) {
 		console.log("snap: ", snap.val());
+        console.log("node id: ", message.nodeId);
         var rootNode = snap.val()[message.nodeId];
-        console.log("node: ", rootNode.inputs);
+        console.log("node: ", rootNode);
 		context.succeed(message);
 	});
 };
