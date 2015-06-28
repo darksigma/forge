@@ -1,5 +1,5 @@
 var HoverStore = require("../stores/HoverStore.js");
-var Immutable      = require("Immutable");
+var Immutable      = require("immutable");
 var Promise        = require("promise");
 
 

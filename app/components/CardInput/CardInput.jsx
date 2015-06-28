@@ -1,5 +1,5 @@
 var _               = require("lodash");
-var Immutable       = require("Immutable");
+var Immutable       = require("immutable");
 var React           = require("react/addons");
 var classSet        = React.addons.classSet;
 var PureRenderMixin = React.addons.PureRenderMixin;

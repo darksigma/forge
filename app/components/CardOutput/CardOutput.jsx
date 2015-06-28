@@ -1,5 +1,5 @@
 var _               = require("lodash");
-var Immutable       = require("Immutable");
+var Immutable       = require("immutable");
 var React           = require("react/addons");
 var SignalIndicator = require("../SignalIndicator/SignalIndicator.jsx");
 var classSet        = React.addons.classSet;

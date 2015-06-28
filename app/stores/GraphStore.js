@@ -1,6 +1,6 @@
 var _            = require("lodash");
 var Reflux       = require("reflux");
-var Immutable    = require("Immutable");
+var Immutable    = require("immutable");
 var Firebase     = require("firebase");
 var globalConfig = require("../globalConfig.js");
 var Promise      = require("promise");

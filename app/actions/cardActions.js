@@ -1,7 +1,7 @@
 var _          = require("lodash");
 var GraphStore = require("../stores/GraphStore.js");
 var Promise    = require("promise");
-var Immutable  = require("Immutable");
+var Immutable  = require("immutable");
 var cardTypes  = require("../cardTypes.js");
 
 

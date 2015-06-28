@@ -1,6 +1,6 @@
 var _         = require("lodash");
 var Reflux    = require("reflux");
-var Immutable = require("Immutable");
+var Immutable = require("immutable");
 
 
 var SelectionStore = Reflux.createStore({
