@@ -1,6 +1,6 @@
 // dependencies
 var AWS = require('aws-sdk');
-// var Firebase = require('firebase');
+var Firebase = require('firebase');
 var globalConfig = require("./globalConfig");
  
 /*
