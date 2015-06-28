@@ -18,7 +18,7 @@ cardTypes.number = {
 };
 
 cardTypes.httpGet = {
-	humanReadableName: "HTTP GET",
+	humanReadableName: "GET",
 	cardClass: "function",
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
@@ -30,7 +30,7 @@ cardTypes.httpGet = {
 };
 
 cardTypes.httpResponse = {
-	humanReadableName: "HTTP Response",
+	humanReadableName: "Response",
 	cardClass: "function",
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
