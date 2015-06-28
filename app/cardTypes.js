@@ -10,8 +10,9 @@ cardTypes.number = {
 	cardClass: "variable",
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
+			console.log("reading value ", cardData.value)
 			return resolve(cardData.value);
-		});
+		})
 	},
 	inputs: [],
 	hasOutput: true,
@@ -34,9 +35,10 @@ cardTypes.httpResponse = {
 	cardClass: "function",
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
-			request.post('api.f0rge.io/complete/' + requestID, inputs[data])
+			console.log("answer ", inputs.data)
+			Request.post('http://api.f0rge.io/complete/' + requestID, {"answer":inputs.data})
 			return resolve(inputs.data);
-		});
+		})
 	},
 	inputs: ["data"],
 	hasOutput: true,
@@ -47,8 +49,9 @@ cardTypes.add = {
 	cardClass: "function",
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
+			console.log("ADDED ", inputs["number1"] + inputs["number2"]);
 			return resolve(inputs["number1"] + inputs["number2"]);
-		});
+		})
 	},
 	inputs: ["number1", "number2"],
 	hasOutput: true,
