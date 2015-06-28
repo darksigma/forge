@@ -3,9 +3,9 @@ var AWS = require('aws-sdk');
 var Firebase = require('firebase');
 var Promise = require('promise');
 var PromiseSeries = require('promise-series');
-var globalConfig = require("./globalConfig");
-var cardTypes = require("./cardTypes")
- 
+var globalConfig = require("./app/globalConfig");
+var cardTypes = require("./app/cardTypes")
+
 /*
 exports.handler = function(event, context) {
 	console.log("hello lambda")
@@ -33,7 +33,7 @@ evaluateCard = function(cards, cardId, httpData, requestId) {
             for (var i = 0; i < values.length; i++){
                 inputs[typeInfo.inputs[i]] = values[i];
             }
-            
+
             typeInfo.run(inputs, cards[cardId], httpData, requestId)
             .then(function(output) {
                 return resolve(output);
@@ -62,4 +62,3 @@ exports.handler = function(event, context) {
 		context.succeed(message);
 	});
 };
-

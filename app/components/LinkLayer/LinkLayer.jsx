@@ -13,7 +13,7 @@ var Rectangle        = require("../../../node_modules/react-art/shapes/rectangle
 var c                = require("../../helpers/color.js");
 var signalProperties = require("../../helpers/signalProperties.js");
 var cardSizing       = require("../../helpers/cardSizing.js");
-var cardTypes        = require("../../../cardTypes");
+var cardTypes        = require("../../cardTypes");
 
 
 var LinkLayer = React.createClass({
@@ -41,7 +41,7 @@ var LinkLayer = React.createClass({
 			if(typeof card.inputs != "undefined" && typeof cardTypes[card.type] != "undefined") {
 				var i = 1;
 				var inputs = cardTypes[card.type].inputs;
-				for(j in inputs) { // connections 
+				for(j in inputs) { // connections
 					if(typeof card.inputs[inputs[j]] != "undefined") {
 						var startCard = cards[card.inputs[inputs[j]]];
 						var start = this.calculateStart(startCard, key, grid);

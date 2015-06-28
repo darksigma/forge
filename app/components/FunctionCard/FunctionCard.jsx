@@ -4,7 +4,7 @@ var classSet        = React.addons.classSet;
 var PureRenderMixin = React.addons.PureRenderMixin;
 var CardInput       = require("../CardInput/CardInput.jsx")
 var CardOutput      = require("../CardOutput/CardOutput.jsx")
-var cardTypes       = require("../../../cardTypes.js");
+var cardTypes       = require("../../cardTypes.js");
 
 
 var FunctionCard = React.createClass({
