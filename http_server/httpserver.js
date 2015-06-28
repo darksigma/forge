@@ -13,9 +13,11 @@ processLambda = function(req, res, graph_id, node_id, is_get) {
     AWS.config.region = 'us-west-2';
     var sns = new AWS.SNS({params: {TopicArn: 'arn:aws:sns:us-west-2:274567149370:forge2015'}});
     var data = is_get ? req.query : req.body;
-
+    console.log("req.query: ", req.query)
+    console.log("req.body: ", req.body)
+    console.log("data: ", data)
     var message = {
-        'request_id': request_id,
+        'requestId': request_id,
         'graphId': graph_id,
         'nodeId': node_id,
         'data': data
