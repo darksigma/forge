@@ -61,7 +61,10 @@ var GraphStore = Reflux.createStore({
 
 
 	valueUpdated_: function(snapshot) {
-		this.data_ = snapshot.val();
+		this.data_ = snapshot.val() || {
+			cards: {}
+		};
+
 		this.trigger(this.data_);
 	}
 
