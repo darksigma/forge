@@ -19,13 +19,13 @@ var Draggable = {
 
 		if(this._isTouchBrowser()){
 			domNode.addEventListener("touchstart", this.draggableTouchStart);
-			document.addEventListener("touchmove", this.draggableTouchMove);
-			document.addEventListener("touchend", this.draggableTouchEnd);
+			window.addEventListener("touchmove", this.draggableTouchMove);
+			window.addEventListener("touchend", this.draggableTouchEnd);
 		}
 		else {
 			domNode.addEventListener("mousedown", this.draggableMouseDown);
-			document.addEventListener("mousemove", this.draggableMouseMove);
-			document.addEventListener("mouseup", this.draggableMouseUp);
+			window.addEventListener("mousemove", this.draggableMouseMove);
+			window.addEventListener("mouseup", this.draggableMouseUp);
 		}
 	},
 
@@ -35,13 +35,13 @@ var Draggable = {
 
 		if(this._isTouchBrowser()){
 			domNode.removeEventListener("touchstart", this.draggableTouchStart);
-			document.removeEventListener("touchmove", this.draggableTouchMove);
-			document.removeEventListener("touchend", this.draggableTouchEnd);
+			window.removeEventListener("touchmove", this.draggableTouchMove);
+			window.removeEventListener("touchend", this.draggableTouchEnd);
 		}
 		else {
 			domNode.removeEventListener("mousedown", this.draggableMouseDown);
-			document.removeEventListener("mousemove", this.draggableMouseMove);
-			document.removeEventListener("mouseup", this.draggableMouseUp);
+			window.removeEventListener("mousemove", this.draggableMouseMove);
+			window.removeEventListener("mouseup", this.draggableMouseUp);
 		}
 	},
 
