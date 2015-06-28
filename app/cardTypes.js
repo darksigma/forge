@@ -14,10 +14,8 @@ var runVariable = function(inputs, cardData, httpData, requestID) {
 	return new Promise(function(resolve, reject) {
 		try {
 			var parsed = JSON.parse(cardData.value);
-			console.log("variable function ", parsed)
 			return resolve(parsed);
 		} catch (e) {
-			console.log("variable function ", cardTypes.value)
 			return resolve(cardData.value)
 		}
 	})
@@ -80,7 +78,6 @@ cardTypes.httpResponse = {
 	cardClass: "function",
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
-			console.log("answer ", inputs.data)
 			if (isNotNull(inputs.data)){
 				Request.post({
 					url: globalConfig.httpServerUrl + 'complete/' + requestID,
@@ -89,9 +86,6 @@ cardTypes.httpResponse = {
 						answer: inputs.data
 					}
 				}, function(error, response, body) {
-					console.log("REQUEST: ", globalConfig.httpServerUrl + 'complete/' + requestID);
-					console.log("error: ", error);
-					console.log("body: ", body);
 					if(error) {
 						reject(error);
 					}
@@ -113,7 +107,6 @@ cardTypes.add = {
 	cardClass: "function",
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
-			console.log("ADDED ", inputs["number1"] + inputs["number2"]);
 			return resolve(inputs["number1"] + inputs["number2"]);
 		})
 	},
@@ -200,7 +193,7 @@ cardTypes.concat = {
 	cardClass: "function",
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
-			return resolve(inputs[string1] + inputs[string2]);
+			return resolve(inputs["string1"] + inputs["string2"]);
 		});
 	},
 	inputs: ["string1", "string2"],
@@ -212,7 +205,7 @@ cardTypes.last = {
 	cardClass: "function",
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
-			return resolve(_.slice(inputs["list"], inputs["List"].length - inputs["amount"]));
+			return resolve(_.rest(inputs["list"], inputs["amount"]));
 		});
 	},
 	inputs: ["list", "amount"],
@@ -224,7 +217,7 @@ cardTypes.first = {
 	cardClass: "function",
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
-			return resolve(_.slice(inputs["list"], 0, inputs["amount"]));
+			return resolve(_.take(inputs["list"], inputs["amount"]));
 		});
 	},
 	inputs: ["list", "amount"],
@@ -249,7 +242,7 @@ cardTypes.firebaseSet = {
 	icon: "/assets/firebase.png",
 	run: function(inputs, cardData, httpData, requestID) {
 		return new Promise(function(resolve, reject) {
-			var fb = new Firebase(globalConfig.firebaseUrl + inputs["url"]);
+			var fb = new Firebase(inputs["url"] + inputs["path"]);
 			fb.set(inputs["set"], function(error){
 				if(error){
 					return resolve(null)

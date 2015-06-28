@@ -35,8 +35,13 @@ processLambda = function(req, res, graph_id, node_id, is_get) {
 
 app.post('/complete/:request_id', function(req, res) {
     console.log("removing " + req.params.request_id)
-    console.log("received data ", JSON.stringify(req.body))
-    sockets[req.params.request_id].send(JSON.stringify(req.body));
+    console.log("received data ", JSON.stringify(req.body));
+
+    var foundSocket = sockets[req.params.request_id];
+    if (foundSocket) {
+        foundSocket.send(JSON.stringify(req.body));
+    }
+
     delete sockets[req.params.request_id]
     res.sendStatus(200)
 });
@@ -53,7 +58,7 @@ app.put('/trigger/:graph_id/:node_id', function (req, res) {
     processLambda(req, res, req.params.graph_id, req.params.node_id, false);
 });
 
-var server = app.listen(80, function () {
+var server = app.listen(3000, function () {
 
   var host = server.address().address;
   var port = server.address().port;

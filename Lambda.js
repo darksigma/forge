@@ -6,25 +6,41 @@ var Promise = require('promise');
 var globalConfig = require("./app/globalConfig");
 var cardTypes = require("./app/cardTypes")
 
-/*
-exports.handler = function(event, context) {
-	console.log("hello lambda")
+
+var runCardFn = function(typeInfo, inputs, cardData, httpData, requestID) {
+    return new Promise(function(resolve, reject) {
+        console.log("\n===============================================>>");
+        console.log("RUNNING LAMBDA: ", typeInfo.humanReadableName);
+        console.log("inputs: ", inputs);
+        console.log("cardData: ", cardData);
+        console.log("httpData: ", httpData);
+        console.log("requestID: ", requestID);
+
+        typeInfo.run(inputs, cardData, httpData, requestID)
+        .then(function(output) {
+            console.log("\n<<===============================================");
+            console.log("RAN LAMBDA: ", typeInfo.humanReadableName);
+            console.log("inputs: ", inputs);
+            console.log("cardData: ", cardData);
+            console.log("httpData: ", httpData);
+            console.log("requestID: ", requestID);
+            console.log("output: ", output);
+
+            return resolve(output);
+        })
+        .catch(function(err) {
+            console.log("lambda threw error: ", typeInfo.humanReadableName, err, err.stack);
+        });
+    });
 };
 
-console.log('Loading function');
 
-*/
-
-evaluateCard = function(cards, cardId, httpData, requestId) {
-    console.log("evaluating! ", cardId)
+var evaluateCard = function(cards, cardId, httpData, requestId) {
     return new Promise(function(resolve, reject) {
-        // if (!cardId) {
-        //     return resolve(null);
-        // }
         var typeInfo = cardTypes[cards[cardId].type];
 
         if (typeInfo.inputs.length === 0){
-            typeInfo.run({}, cards[cardId], httpData, requestId)
+            runCardFn(typeInfo, {}, cards[cardId], httpData, requestId)
             .then(function(output) {
                 return resolve(output);
             });
@@ -40,27 +56,22 @@ evaluateCard = function(cards, cardId, httpData, requestId) {
                 inputs[typeInfo.inputs[i]] = value;
             });
 
-            console.log("running lambda with ", inputs, " and data ", cards[cardId])
-            typeInfo.run(inputs, cards[cardId], httpData, requestId)
+            runCardFn(typeInfo, inputs, cards[cardId], httpData, requestId)
             .then(function(output) {
                 return resolve(output);
             })
             .catch(function(err) {
-                console.log("Error at function of cardId ", cardId, " with error ", err)
                 return resolve(null);
             })
         })
         .catch(function(err) {
-            console.log("Error at cardId ", cardId, " with error ", err, err.stack)
             return resolve(null);
         })
     });
 }
 
 exports.handler = function(event, context) {
-    console.log('Received event:', JSON.stringify(event, null, 2));
     var message = JSON.parse(event.Records[0].Sns.Message);
-    console.log('From SNS:', message);
     var graph_id = message.graphId;
     var root = new Firebase(globalConfig.firebaseUrl);
     root.child("graphs").child(graph_id).once('value', function(snap) {
@@ -72,19 +83,17 @@ exports.handler = function(event, context) {
             return cards[cardId].type === "httpResponse";
         });
 
-        console.log(responseCardIds);
 
         evalAll = Promise.all(_.map(responseCardIds, function(responseCardId) {
             return evaluateCard(cards, responseCardId, message.data, message.requestId)
         })).then(function(){
-            context.succeed(message);
+            //context.succeed(message);
         })
         .catch(function(err) {
-            console.log("Error: ", err, err.stack)
         });
 
 	});
 };
 
 
-// exports.handler({'Records':[{'Sns':{'Message':'{"graphId":"get-popular","nodeId":"-JsuTol-k21_7GrLRNN-","requestId":"173b3bad-8bd2-406d-9902-58ec69b10102", "data":{}}'}}]}, null);
+exports.handler({'Records':[{'Sns':{'Message':'{"graphId":"user-popular-tweets","nodeId":"-JsusLyBgt_0VdWK3Osz","requestId":"cb443e33-5029-4ca7-8f74-340a302ac955", "data":{"user":"simonsays", "numTweets": 10}}'}}]}, null);
