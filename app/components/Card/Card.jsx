@@ -6,10 +6,11 @@ var PureRenderMixin  = React.addons.PureRenderMixin;
 var cardTypes        = require("../../cardTypes.js");
 var FunctionCard     = require("../FunctionCard/FunctionCard.jsx")
 var VariableCard     = require("../VariableCard/VariableCard.jsx")
+var RequestCard      = require("../RequestCard/RequestCard.jsx")
 var Draggable        = require("../../mixins/Draggable.jsx");
 var CardOutput       = require("../CardOutput/CardOutput.jsx")
 var selectionActions = require("../../actions/selectionActions.js");
-var hoverActions = require("../../actions/hoverActions.js");
+var hoverActions     = require("../../actions/hoverActions.js");
 var dragActions      = require("../../actions/dragActions.js");
 
 
@@ -20,6 +21,7 @@ var Card = React.createClass({
 	cardClassRendererMap: {
 		"function": FunctionCard,
 		"variable": VariableCard,
+		"request": RequestCard,
 	},
 
 
@@ -76,7 +78,8 @@ var Card = React.createClass({
 			return (
 				<Handler
 					cardId={this.props.cardId}
-					cardData={this.props.cardData}/>
+					cardData={this.props.cardData}
+					graph={this.props.graph} />
 			)
 		}
 	},
