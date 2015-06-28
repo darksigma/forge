@@ -25,8 +25,17 @@ var CardOutput = React.createClass({
 			}
 		}.bind(this));
 
+		var isDropping = false;
+		if (this.canHandleDrop(this.props.drag.get("dragData")) && this.props.drag.get("draggedOverComponent") === this) {
+			isDropping = true;
+		}
+
+		var classes = classSet({
+			CardOutput: true,
+			isDropping: isDropping,
+		})
 		return (
-			<div className="CardOutput">
+			<div className={classes}>
 				<SignalIndicator active={foundInputsToThis} />
 			</div>
 		);
@@ -34,9 +43,14 @@ var CardOutput = React.createClass({
 
 
 	handleDrop: function(dragData) {
-		if (dragData && dragData.get("type") === "input") {
+		if (this.canHandleDrop(dragData)) {
 			dragActions.createLink(this.props.cardId, dragData.get("cardId"), dragData.get("inputName"));
 		}
+	},
+
+
+	canHandleDrop: function(dragData) {
+		return dragData && dragData.get("type") === "input";
 	},
 
 

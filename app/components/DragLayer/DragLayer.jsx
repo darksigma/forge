@@ -36,7 +36,8 @@ var DragLayer = React.createClass({
 					y={y}
 					width={cellWidth}
 					selected={true}
-					graph={this.props.graph} />
+					graph={this.props.graph}
+					drag={this.props.drag} />
 			);
 		}
 	}

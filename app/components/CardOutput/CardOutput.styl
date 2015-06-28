@@ -3,3 +3,9 @@
 	&:hover
 		> .SignalIndicator
 			background-color: lighten($link-color, 50%)
+
+	&:hover, &.isDropping
+		color: $link-color
+
+		> .SignalIndicator
+			background-color: lighten($link-color, 50%)
