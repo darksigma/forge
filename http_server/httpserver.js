@@ -35,6 +35,7 @@ processLambda = function(req, res, graph_id, node_id, is_get) {
 
 app.post('/complete/:request_id', function(req, res) {
     console.log("removing " + req.params.request_id)
+    console.log("received data ", JSON.stringify(req.body))
     sockets[req.params.request_id].send(JSON.stringify(req.body));
     delete sockets[req.params.request_id]
     res.sendStatus(200)
