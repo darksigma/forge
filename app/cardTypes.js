@@ -6,6 +6,11 @@ var globalConfig = require("./globalConfig");
 
 var cardTypes = {};
 
+var functionIcon = "/assets/red.svg";
+var httpIcon     = "/assets/yellow.svg";
+var variableIcon = "/assets/orange.svg";
+var firebaseIcon = "/assets/firebase.png";
+
 isNotNull = function(x){
 	return typeof x !== "undefined" && x !== null;
 }
@@ -27,6 +32,7 @@ cardTypes.number = {
 	run: runVariable,
 	inputs: [],
 	hasOutput: true,
+	icon: variableIcon,
 };
 
 cardTypes.string = {
@@ -35,6 +41,7 @@ cardTypes.string = {
 	run: runVariable,
 	inputs: [],
 	hasOutput: true,
+	icon: variableIcon,
 };
 
 cardTypes.httpGet = {
@@ -46,6 +53,7 @@ cardTypes.httpGet = {
 		});
 	},
 	inputs: [],
+	icon: httpIcon,
 	hasOutput: true,
 };
 
@@ -58,6 +66,7 @@ cardTypes.httpPost = {
 		});
 	},
 	inputs: [],
+	icon: httpIcon,
 	hasOutput: true,
 };
 
@@ -70,6 +79,7 @@ cardTypes.httpPut = {
 		});
 	},
 	inputs: [],
+	icon: httpIcon,
 	hasOutput: true,
 };
 
@@ -99,6 +109,7 @@ cardTypes.httpResponse = {
 		})
 	},
 	inputs: ["data"],
+	icon: httpIcon,
 	hasOutput: true,
 };
 
@@ -111,6 +122,7 @@ cardTypes.add = {
 		})
 	},
 	inputs: ["number1", "number2"],
+	icon: functionIcon,
 	hasOutput: true,
 };
 
@@ -123,6 +135,7 @@ cardTypes.subtract = {
 		});
 	},
 	inputs: ["number1", "number2"],
+	icon: functionIcon,
 	hasOutput: true,
 };
 
@@ -135,6 +148,7 @@ cardTypes.divide = {
 		});
 	},
 	inputs: ["number1", "number2"],
+	icon: functionIcon,
 	hasOutput: true,
 };
 
@@ -147,6 +161,7 @@ cardTypes.multiply = {
 		});
 	},
 	inputs: ["number1", "number2"],
+	icon: functionIcon,
 	hasOutput: true,
 };
 
@@ -159,6 +174,7 @@ cardTypes.sortBy = {
 		});
 	},
 	inputs: ["list", "sortKey"],
+	icon: functionIcon,
 	hasOutput: true,
 };
 
@@ -173,6 +189,7 @@ cardTypes.filter = {
 		});
 	},
 	inputs: ["list", "filterKey", "equalsValue"],
+	icon: functionIcon,
 	hasOutput: true,
 };
 
@@ -185,6 +202,7 @@ cardTypes.jsonKey = {
 		});
 	},
 	inputs: ["key", "object"],
+	icon: functionIcon,
 	hasOutput: true,
 };
 
@@ -197,6 +215,7 @@ cardTypes.concat = {
 		});
 	},
 	inputs: ["string1", "string2"],
+	icon: functionIcon,
 	hasOutput: true,
 };
 
@@ -209,6 +228,7 @@ cardTypes.last = {
 		});
 	},
 	inputs: ["list", "amount"],
+	icon: functionIcon,
 	hasOutput: true,
 };
 
@@ -221,6 +241,7 @@ cardTypes.first = {
 		});
 	},
 	inputs: ["list", "amount"],
+	icon: functionIcon,
 	hasOutput: true,
 };
 
@@ -233,6 +254,7 @@ cardTypes.reverse = {
 		});
 	},
 	inputs: ["list"],
+	icon: functionIcon,
 	hasOutput: true,
 };
 
@@ -253,6 +275,7 @@ cardTypes.firebaseSet = {
 		});
 	},
 	inputs: ["url", "path", "set"],
+	icon: firebaseIcon,
 	hasOutput: true,
 };
 
@@ -274,6 +297,7 @@ cardTypes.firebasePush = {
 		});
 	},
 	inputs: ["url", "path", "set"],
+	icon: firebaseIcon,
 	hasOutput: true,
 };
 
@@ -292,6 +316,7 @@ cardTypes.firebaseGet = {
 		});
 	},
 	inputs: ["url", "path"],
+	icon: firebaseIcon,
 	hasOutput: true,
 };
 
