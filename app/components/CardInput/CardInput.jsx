@@ -1,12 +1,13 @@
 var React           = require("react/addons");
 var classSet        = React.addons.classSet;
 var PureRenderMixin = React.addons.PureRenderMixin;
-var SignalIndicator = require("../SignalIndicator/SignalIndicator.jsx")
+var SignalIndicator = require("../SignalIndicator/SignalIndicator.jsx");
+var Droppable       = require("../../mixins/Droppable.jsx");
 
 
 var CardInput = React.createClass({
 
-	mixins: [PureRenderMixin],
+	mixins: [PureRenderMixin, Droppable],
 
 
 	render: function() {

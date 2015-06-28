@@ -23,12 +23,8 @@ var GridLayer = React.createClass({
 		var _this       = this;
 		var cellsInView = gridHelpers.getCellsInView(this.props.grid);
 
-		if (this.props.drag.get("cardId")) {
-			var dragCellCoordinates = gridHelpers.closestCellToDrag(cellsInView, this.props.grid, this.props.drag);
-		}
-
 		var cells = _.map(cellsInView, function(coordinate) {
-			return _this.renderCell(coordinate, dragCellCoordinates);
+			return _this.renderCell(coordinate);
 		});
 
 		return (
@@ -39,15 +35,19 @@ var GridLayer = React.createClass({
 	},
 
 
-	renderCell: function(coordinate, dragCellCoordinates) {
+	renderCell: function(coordinate) {
 		var cellWidth           = this.props.grid.get("cellWidth");
 		var x                   = (coordinate.x * cellWidth) - this.props.grid.get("transX");
 		var y                   = (coordinate.y * cellWidth) - this.props.grid.get("transY");
 		var cardIdForCoordinate = gridHelpers.getCardIdForCoordinate(coordinate, this.props.graph.cards);
 
-		var isDropping = dragCellCoordinates &&
-			coordinate.x === dragCellCoordinates.x &&
-			coordinate.y === dragCellCoordinates.y;
+		var draggedOverComponent = this.props.drag.get("draggedOverComponent");
+		var isDropping = false;
+
+		if (draggedOverComponent) {
+			isDropping = draggedOverComponent.props.coordinate.x === coordinate.x &&
+				draggedOverComponent.props.coordinate.y === coordinate.y;
+		}
 
 		return (
 			<EmptyCell

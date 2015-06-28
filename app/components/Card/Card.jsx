@@ -1,4 +1,5 @@
 var _                = require("lodash");
+var Immutable        = require("Immutable");
 var React            = require("react/addons");
 var classSet         = React.addons.classSet;
 var PureRenderMixin  = React.addons.PureRenderMixin;
@@ -95,19 +96,22 @@ var Card = React.createClass({
 
 	handleDragStart: function(e){
 		var thisRect = this.getDOMNode().getBoundingClientRect();
-		var startX = thisRect.left;
-		var startY = thisRect.top;
-		dragActions.startDrag(this.props.cardId, startX, startY, e.currentX - e.startX, e.currentY - e.startY);
+		var startX = thisRect.left + thisRect.width / 2;
+		var startY = thisRect.top + thisRect.width / 2;
+		dragActions.startDrag(Immutable.Map({
+			type: "card",
+			cardId: this.props.cardId
+		}), startX, startY, e.currentX - e.startX, e.currentY - e.startY);
 	},
 
 
 	handleDragMove: function(e){
-		dragActions.continueDrag(this.props.cardId, e.currentX - e.startX, e.currentY - e.startY);
+		dragActions.continueDrag(e.currentX - e.startX, e.currentY - e.startY);
 	},
 
 
 	handleDragEnd: function(e){
-		dragActions.endDrag(this.props.cardId);
+		dragActions.endDrag();
 	},
 
 

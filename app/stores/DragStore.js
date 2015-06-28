@@ -6,7 +6,13 @@ var Immutable = require("Immutable");
 var DragStore = Reflux.createStore({
 
 	init: function(){
-		this.data_ = Immutable.Map({});
+		this.data_ = Immutable.Map({
+			dragData: null,
+			startX: null,
+			startY: null,
+			offsetX: null,
+			offsetY: null,
+		});
 	},
 
 
