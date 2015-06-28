@@ -1,4 +1,5 @@
 var Promise = require("promise");
+var HTTP = require("http")
 
 
 var cardTypes = {};
@@ -16,6 +17,29 @@ cardTypes.number = {
 	hasOutput: true,
 };
 
+// cardTypes.httpGet = {
+// 	humanReadableName: "HTTP GET",
+// 	cardClass: "httpGet",
+// 	run: function(inputs, cardData, httpData, requestID) {
+// 		return new Promise(function(resolve, reject) {
+// 			return resolve(httpData);
+// 		});
+// 	},
+// 	inputs: [],
+// 	hasOutput: true,
+// };
+
+// cardTypes.httpResponse = {
+// 	humanReadableName: "HTTP Response",
+// 	cardClass: "httpResponse",
+// 	run: function(inputs, cardData, httpData, requestID) {
+// 		return new Promise(function(resolve, reject) {
+// 			return resolve(inputs.data);
+// 		});
+// 	},
+// 	inputs: ["data"],
+// 	hasOutput: true,
+// };
 
 cardTypes.add = {
 	humanReadableName: "Add",
