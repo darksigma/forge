@@ -38,7 +38,7 @@ var LinkLayer = React.createClass({
 		var signals = [];
 		for(key in cards) { // go through cards
 			var card = cards[key];
-			if(typeof card.inputs != "undefined") {
+			if(typeof card.inputs != "undefined" && typeof cardTypes[card.type] != "undefined") {
 				var i = 1;
 				var inputs = cardTypes[card.type].inputs;
 				for(j in inputs) { // connections 

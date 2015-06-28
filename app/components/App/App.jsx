@@ -27,8 +27,8 @@ var App = React.createClass({
 		return (
 			<div className="App">
 				<GridLayer graph={this.state.graph} grid={this.state.grid} />
-				/*<LinkLayer graph={this.state.graph} grid={this.state.grid} />*/
 				<CardLayer graph={this.state.graph} grid={this.state.grid} selection={this.state.selection} drag={this.state.drag} />
+				<LinkLayer graph={this.state.graph} grid={this.state.grid} />
 				<DragLayer graph={this.state.graph} grid={this.state.grid} drag={this.state.drag} />
 				<img className="Logo" src="/assets/forge.svg"></img>
 			</div>
