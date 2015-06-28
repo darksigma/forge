@@ -22,14 +22,17 @@ var LinkLayer = React.createClass({
 
 
 	render: function() {
-    var grid = this.props.grid;
-		var cards = this.props.graph.cards;
-    var wWidth = grid.get("windowWidth");
-    var wHeight = grid.get("windowHeight");
+		var grid    = this.props.grid;
+		var cards   = this.props.graph.cards;
+		var wWidth  = grid.get("windowWidth");
+		var wHeight = grid.get("windowHeight");
+		var viewBox = "0 0 " + grid.get('windowWidth') + " " + grid.get('windowHeight');
 
 		return (
 			<div className="LinkLayer">
-				{this.drawSignals(cards, grid, c)}
+				<svg className="svg" viewBox={viewBox}>
+					{this.drawSignals(cards, grid, c)}
+				</svg>
 			</div>
 		);
 	},
@@ -113,13 +116,10 @@ var LinkLayer = React.createClass({
 			return memo + num[0] + " " + num[1] + " ";
 		}, "M");
 
-		var viewBox = "0 0 " + grid.get('windowWidth') + " " + grid.get('windowHeight');
 		return (
-			<svg className="svg" viewBox={viewBox}>
-				<g>
-					<path className="signal" d={pointString}></path>
-				</g>
-			</svg>
+			<g>
+				<path className="signal" d={pointString}></path>
+			</g>
 		);
 	},
 
