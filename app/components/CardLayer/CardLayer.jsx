@@ -52,7 +52,8 @@ var CardLayer = React.createClass({
 					x={x}
 					y={y}
 					width={cellWidth}
-					selected={isSelected}/>
+					selected={isSelected}
+					graph={this.props.graph} />
 			);
 		}
 	},

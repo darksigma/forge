@@ -10,9 +10,14 @@ var CardInput = React.createClass({
 
 
 	render: function() {
+		var active = false;
+		if (this.props.inputValue) {
+			active = true;
+		}
+
 		return (
 			<div className="CardInput">
-				<SignalIndicator active={true} />
+				<SignalIndicator active={active} />
 				<div className="Label">
 					{this.props.inputName}
 				</div>

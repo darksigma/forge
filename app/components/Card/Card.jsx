@@ -1,3 +1,4 @@
+var _                = require("lodash");
 var React            = require("react/addons");
 var classSet         = React.addons.classSet;
 var PureRenderMixin  = React.addons.PureRenderMixin;
@@ -32,13 +33,24 @@ var Card = React.createClass({
 			selected: this.props.selected,
 		});
 
+		var foundInputsToThis = _.any(this.props.graph.cards, function(cardData, cardId) {
+			if (cardData.inputs) {
+				return _.any(cardData.inputs, function(inputsTo, name){
+					return inputsTo === this.props.cardId;
+				}.bind(this));
+			}
+			else {
+				return false
+			}
+		}.bind(this));
+
 		return (
 			<div className={classes} style={rootStyle} onMouseDown={this.handleMouseDown}>
 				<div className="CardInner">
 					<div className="Header">
 						<div className="Icon"></div>
 						<div className="Name">{this.getCardName()}</div>
-						<SignalIndicator active={true} />
+						<SignalIndicator active={foundInputsToThis} />
 					</div>
 					<div className="CardUI">
 						{this.renderCardClass()}

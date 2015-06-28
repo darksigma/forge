@@ -1,6 +1,7 @@
 .Card
 	position: absolute
 	padding: 12px
+	pointer-events: none
 
 	&.selected
 		> .CardInner
@@ -9,6 +10,7 @@
 	> .CardInner
 		width: 100%
 		height: 100%
+		pointer-events: auto
 
 		display: flex
 		flex-direction: column
@@ -45,7 +47,10 @@
 				color: $default-text-color
 
 			> .SignalIndicator
-				margin-right: 4px
+				margin-right: 2px
+
+				&:hover
+					background-color: lighten($link-color, 50%)
 
 		> .CardUI
 			flex-grow: 1
