@@ -57,52 +57,52 @@ cardTypes.add = {
 	hasOutput: true,
 };
 
-cardTypes.subtract = {
-	humanReadableName: "Subtract",
-	cardClass: "function",
-	run: function(inputs, cardData, httpData, requestID) {
-		return new Promise(function(resolve, reject) {
-			return resolve(inputs["number1"] - inputs["number2"]);
-		});
-	},
-	inputs: ["number1", "number2"],
-	hasOutput: true,
-};
+// cardTypes.subtract = {
+// 	humanReadableName: "Subtract",
+// 	cardClass: "function",
+// 	run: function(inputs, cardData, httpData, requestID) {
+// 		return new Promise(function(resolve, reject) {
+// 			return resolve(inputs["number1"] - inputs["number2"]);
+// 		});
+// 	},
+// 	inputs: ["number1", "number2"],
+// 	hasOutput: true,
+// };
 
-cardTypes.divide = {
-	humanReadableName: "Divide",
-	cardClass: "function",
-	run: function(inputs, cardData, httpData, requestID) {
-		return new Promise(function(resolve, reject) {
-			return resolve(inputs["number1"] / inputs["number2"]);
-		});
-	},
-	inputs: ["number1", "number2"],
-	hasOutput: true,
-};
+// cardTypes.divide = {
+// 	humanReadableName: "Divide",
+// 	cardClass: "function",
+// 	run: function(inputs, cardData, httpData, requestID) {
+// 		return new Promise(function(resolve, reject) {
+// 			return resolve(inputs["number1"] / inputs["number2"]);
+// 		});
+// 	},
+// 	inputs: ["number1", "number2"],
+// 	hasOutput: true,
+// };
 
-cardTypes.multiply = {
-	humanReadableName: "Multiply",
-	cardClass: "function",
-	run: function(inputs, cardData, httpData, requestID) {
-		return new Promise(function(resolve, reject) {
-			return resolve(inputs["number1"] * inputs["number2"]);
-		});
-	},
-	inputs: ["number1", "number2"],
-	hasOutput: true,
-};
+// cardTypes.multiply = {
+// 	humanReadableName: "Multiply",
+// 	cardClass: "function",
+// 	run: function(inputs, cardData, httpData, requestID) {
+// 		return new Promise(function(resolve, reject) {
+// 			return resolve(inputs["number1"] * inputs["number2"]);
+// 		});
+// 	},
+// 	inputs: ["number1", "number2"],
+// 	hasOutput: true,
+// };
 
-cardTypes.sort = {
-	humanReadableName: "SortBy",
-	cardClass: "function",
-	run: function(inputs, cardData, httpData, requestID) {
-		return new Promise(function(resolve, reject) {
-			return resolve(inputs["number1"] * inputs["number2"]);
-		});
-	},
-	inputs: ["number1", "number2"],
-	hasOutput: true,
-};
+// cardTypes.sort = {
+// 	humanReadableName: "SortBy",
+// 	cardClass: "function",
+// 	run: function(inputs, cardData, httpData, requestID) {
+// 		return new Promise(function(resolve, reject) {
+// 			return resolve(inputs["number1"] * inputs["number2"]);
+// 		});
+// 	},
+// 	inputs: ["number1", "number2"],
+// 	hasOutput: true,
+// };
 
 module.exports = cardTypes;
