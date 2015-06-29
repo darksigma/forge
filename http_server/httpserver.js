@@ -7,7 +7,7 @@ app.use(bodyParser.json())
 
 var sockets = {}
 
-processLambda = function(req, res, graph_id, node_id, is_get) {
+processLambda = function(req, res, graph_id, is_get) {
     request_id = uuid.v4();
     sockets[request_id] = res;
     AWS.config.region = 'us-west-2';
@@ -19,7 +19,6 @@ processLambda = function(req, res, graph_id, node_id, is_get) {
     var message = {
         'requestId': request_id,
         'graphId': graph_id,
-        'nodeId': node_id,
         'data': data
     };
     sns.publish({Message: JSON.stringify(message)}, function (err, data) {
@@ -46,16 +45,16 @@ app.post('/complete/:request_id', function(req, res) {
     res.sendStatus(200)
 });
 
-app.get('/trigger/:graph_id/:node_id', function (req, res) {
-    processLambda(req, res, req.params.graph_id, req.params.node_id, true);
+app.get('/trigger/:graph_id', function (req, res) {
+    processLambda(req, res, req.params.graph_id, true);
 });
 
-app.post('/trigger/:graph_id/:node_id', function (req, res) {
-    processLambda(req, res, req.params.graph_id, req.params.node_id, false);
+app.post('/trigger/:graph_id', function (req, res) {
+    processLambda(req, res, req.params.graph_id, false);
 });
 
-app.put('/trigger/:graph_id/:node_id', function (req, res) {
-    processLambda(req, res, req.params.graph_id, req.params.node_id, false);
+app.put('/trigger/:graph_id', function (req, res) {
+    processLambda(req, res, req.params.graph_id, false);
 });
 
 var server = app.listen(80, function () {
@@ -63,6 +62,6 @@ var server = app.listen(80, function () {
   var host = server.address().address;
   var port = server.address().port;
 
-  console.log('Example app listening at http://%s:%s', host, port);
+  console.log('Forge HTTP server listening at http://%s:%s', host, port);
 
 });

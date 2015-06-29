@@ -96,4 +96,4 @@ exports.handler = function(event, context) {
 };
 
 
-// exports.handler({'Records':[{'Sns':{'Message':'{"graphId":"user-popular-tweets","nodeId":"-JsusLyBgt_0VdWK3Osz","requestId":"cb443e33-5029-4ca7-8f74-340a302ac955", "data":{"user":"xyz", "numTweets": 10}}'}}]}, null);
+// exports.handler({'Records':[{'Sns':{'Message':'{"graphId":"user-popular-tweets","requestId":"cb443e33-5029-4ca7-8f74-340a302ac955", "data":{"user":"xyz", "numTweets": 10}}'}}]}, null);
