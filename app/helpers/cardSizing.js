@@ -1,5 +1,5 @@
 module.exports = {
 	outputOffsetY: 33,
-	distToFirstInputY: 41,
+	distToFirstInputY: 36,
 	inputSpacingY: 30,
 }
