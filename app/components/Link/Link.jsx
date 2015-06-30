@@ -8,6 +8,7 @@ var PureRenderMixin = React.addons.PureRenderMixin;
 var c                = require("../../helpers/color.js");
 var signalProperties = require("../../helpers/signalProperties.js");
 var cardSizing       = require("../../helpers/cardSizing.js");
+var gridHelpers      = require("../../helpers/gridHelpers.js");
 var cardTypes        = require("../../cardTypes");
 
 var selectionActions = require("../../actions/selectionActions.js");
@@ -97,12 +98,20 @@ var Link = React.createClass({
 			return [preStart, start, stop, postStop];
 		}
 		var points = [preStart, start];
+		/*
+		 * Go to corner:
+		 * top right if below || equal
+		 * bottom right if above
+		 */
 		if(startCard.y < stopCard.y) {
 			points.push([start[0], startCard.y*cellSize - transY + cellSize]);
 		} else {
 			points.push([start[0], startCard.y*cellSize - transY]);
 		}
 
+		/*
+		 * Iteration 
+		 */
 		var mostRecentPoint = points[points.length-1];
 		while(mostRecentPoint[0] != stop[0]) {
 			if(mostRecentPoint[0] < stop[0]) {
