@@ -1,12 +1,15 @@
 .VariableCard
+	display: flex
+	flex-direction: column
 
 	> .Input
-		width: 100%
+		flex-grow: 1
 		outline: none
 		border: none
 		resize: none
 		color: $default-text-color
 		font-size: $default-font-size
+		margin-bottom: 8px
 
 		&:hover, &:focus
 			background-color: $activeCell

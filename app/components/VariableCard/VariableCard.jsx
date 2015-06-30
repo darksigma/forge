@@ -12,16 +12,20 @@ var VariableCard = React.createClass({
 	render: function() {
 		return (
 			<div className="VariableCard">
-				<input className="Input IgnoreDrag" defaultValue={this.props.cardData.value} onKeyDown={this.handleInputKeyDown}></input>
+				<textarea
+					ref="input"
+					className="Input IgnoreDrag"
+					value={this.props.cardData.value}
+					onChange={this.handleChange}>
+				</textarea>
 			</div>
 		);
 	},
 
 
-	handleInputKeyDown: function(e) {
-		if (e.keyCode === 13) {
-			cardActions.editCardVariable(this.props.cardId, e.target.value);
-		}
+	handleChange: function(e) {
+		var input = this.refs.input.getDOMNode();
+		cardActions.editCardVariable(this.props.cardId, input.value);
 	},
 
 });
