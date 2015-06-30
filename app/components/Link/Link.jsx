@@ -72,26 +72,20 @@ var Link = React.createClass({
 
 	calculateStart: function(startCard, cardId, grid) {
 		var cellSize = grid.get("cellWidth");
-		var transX = grid.get("transX");
-		var transY = grid.get("transY");
-		var x = startCard.x*cellSize + cellSize - transX;
-		var y = startCard.y*cellSize - transY + cardSizing.outputOffsetY;
+		var x = startCard.x*cellSize + cellSize;
+		var y = startCard.y*cellSize + cardSizing.outputOffsetY;
 		return [x, y];
 	},
 
 	calculateStop: function(card, i, grid) {
 		var cellSize = grid.get("cellWidth");
-		var transX = grid.get("transX");
-		var transY = grid.get("transY");
-		var x = card.x*cellSize - transX;
-		var y = card.y*cellSize - transY + cardSizing.distToFirstInputY + cardSizing.inputSpacingY*i;
+		var x = card.x*cellSize;
+		var y = card.y*cellSize + cardSizing.distToFirstInputY + cardSizing.inputSpacingY*i;
 		return [x, y];
 	},
 
 	calculatePath: function(start, stop, stopCard, startCard, grid) {
 		var cellSize = grid.get("cellWidth");
-		var transX = grid.get("transX");
-		var transY = grid.get("transY");
 		var preStart = [start[0]-12, start[1]];
 		var postStop = [stop[0]+12, stop[1]];
 		if(stop[0] == start[0]) {
@@ -104,13 +98,13 @@ var Link = React.createClass({
 		 * bottom right if above
 		 */
 		if(startCard.y < stopCard.y) {
-			points.push([start[0], startCard.y*cellSize - transY + cellSize]);
+			points.push([start[0], startCard.y*cellSize + cellSize]);
 		} else {
-			points.push([start[0], startCard.y*cellSize - transY]);
+			points.push([start[0], startCard.y*cellSize]);
 		}
 
 		/*
-		 * Iteration 
+		 * Iteration
 		 */
 		var mostRecentPoint = points[points.length-1];
 		while(mostRecentPoint[0] != stop[0]) {

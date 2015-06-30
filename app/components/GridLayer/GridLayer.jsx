@@ -29,7 +29,7 @@ var GridLayer = React.createClass({
 
 		return (
 			<div className="GridLayer">
-        {_.compact(cells)}
+				{_.compact(cells)}
 			</div>
 		);
 	},
@@ -37,8 +37,8 @@ var GridLayer = React.createClass({
 
 	renderCell: function(coordinate) {
 		var cellWidth           = this.props.grid.get("cellWidth");
-		var x                   = (coordinate.x * cellWidth) - this.props.grid.get("transX");
-		var y                   = (coordinate.y * cellWidth) - this.props.grid.get("transY");
+		var x                   = (coordinate.x * cellWidth);
+		var y                   = (coordinate.y * cellWidth);
 		var cardIdForCoordinate = gridHelpers.getCardIdForCoordinate(coordinate, this.props.graph.cards);
 
 		var draggedOverComponent = this.props.drag.get("draggedOverComponent");
