@@ -94,7 +94,6 @@ var Card = React.createClass({
 
 	handleMouseDown: function() {
 		selectionActions.selectCard(this.props.cardId);
-		//hoverActions.clearHover();
 	},
 
 
