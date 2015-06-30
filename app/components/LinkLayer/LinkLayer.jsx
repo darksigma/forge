@@ -46,6 +46,7 @@ var LinkLayer = React.createClass({
 							<Link grid={grid}
 										cards={cards}
 										i={i}
+										key={"input=" + inputs[j] + "_cardId=" + cardId}
 										selection={this.props.selection}
 										hover={this.props.hover}
 										inputName={inputs[j]}
@@ -77,6 +78,7 @@ var LinkLayer = React.createClass({
 				signals.push(
 					<Link grid={grid}
 								i={i}
+								key={"input=" + info.inputName + "_cardId=" + info.outputCardId}
 								selection={this.props.selection}
 								hover={this.props.hover}
 								inputName={info.inputName}
