@@ -245,6 +245,47 @@ cardTypes.first = {
 	hasOutput: true,
 };
 
+cardTypes.chunk = {
+	humanReadableName: "Chunk",
+	cardClass: "function",
+	run: function(inputs, cardData, httpData, requestID) {
+		return new Promise(function(resolve, reject) {
+			return resolve(_.chunk(inputs["list"], inputs["size"]));
+		});
+	},
+	inputs: ["list", "size"],
+	icon: functionIcon,
+	hasOutput: true,
+};
+
+cardTypes.compact = {
+	humanReadableName: "Compact",
+	cardClass: "function",
+	run: function(inputs, cardData, httpData, requestID) {
+		return new Promise(function(resolve, reject) {
+			return resolve(_.compact(inputs["list"]));
+		});
+	},
+	inputs: ["list"],
+	icon: functionIcon,
+	hasOutput: true,
+};
+
+cardTypes.exclude = {
+	humanReadableName: "Exclude",
+	cardClass: "function",
+	run: function(inputs, cardData, httpData, requestID) {
+		return new Promise(function(resolve, reject) {
+			return resolve(_.difference(inputs["list"], inputs["exclude"]));
+		});
+	},
+	inputs: ["list", "exclude"],
+	icon: functionIcon,
+	hasOutput: true,
+};
+
+cardTypes
+
 cardTypes.reverse = {
 	humanReadableName: "Reverse",
 	cardClass: "function",
