@@ -60,6 +60,9 @@ var LinkLayer = React.createClass({
 			}
 		}
 
+		/*
+		 * Draw potential link
+		 */
 		var draggedOverComponent = this.props.drag.get("draggedOverComponent");
 		if(draggedOverComponent && _.isFunction(draggedOverComponent.getVirtualLink)) {
 			var info = draggedOverComponent.getVirtualLink();

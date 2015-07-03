@@ -106,7 +106,7 @@ var Link = React.createClass({
 		/*
 		 * Iteration
 		 */
-		var mostRecentPoint = points[points.length-1];
+		var mostRecentPoint = _.last(points);
 		while(mostRecentPoint[0] != stop[0]) {
 			if(mostRecentPoint[0] < stop[0]) {
 				//go right
@@ -115,7 +115,7 @@ var Link = React.createClass({
 				// go left
 				points.push([mostRecentPoint[0] - cellSize, mostRecentPoint[1]]);
 			}
-			mostRecentPoint = points[points.length-1];
+			mostRecentPoint = _.last(points);
 		}
 
 		points.push(stop);
